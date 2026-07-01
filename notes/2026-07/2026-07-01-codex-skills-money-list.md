@@ -111,3 +111,68 @@ public_level: sanitized
 ## 10. 当前结论
 
 这张图不是“照单安装清单”，更适合作为 Agent Skill 商业化方向的观察样本。下一步值得继续追源：分别确认 8 个 Skill 的真实仓库、安装方式、License、依赖、是否可本地运行，以及是否能改造成内部市场/销售/产品场景的小实验。
+
+## 11. 继续追源记录（2026-07-01）
+
+继续追了公开仓库和技能市场线索后，当前可以把 8 类分成三档：
+
+### A. 已追到相对明确仓库/项目，值得进入二次阅读
+
+1. `last30days`
+   - 仓库：`mvanhorn/last30days-skill`
+   - 定位：跨 Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub、Web 等来源研究最近 30 天讨论，并按真实互动信号排序。
+   - 业务价值：适合做趋势雷达、竞品/话题研究、销售内容选题、市场洞察。
+   - 验证重点：数据源依赖、API Key/Cookie 需求、国内网络可用性、输出证据质量。
+
+2. `xhs-ops`
+   - 仓库线索：`Xiangyu-CAS/xiaohongshu-ops-skill`、`autoclaw-cc/xiaohongshu-skills`、`leeguooooo/xhs-skill`
+   - 定位：小红书账号定位、首页推荐流分析、选题、内容生成、发布、评论回复、知识库沉淀。
+   - 业务价值：适合市场内容团队做选题/拆解/复盘；不建议一开始全自动发布。
+   - 验证重点：登录态、浏览器自动化稳定性、平台风控、版权与账号安全。
+
+3. `claude-legal`
+   - 仓库：`evolsb/claude-legal-skill`
+   - 定位：合同初筛、条款风险识别、按立场进行风险判断，参考 CUAD 合同数据集。
+   - 业务价值：适合做法务/采购合同审阅前置材料准备。
+   - 验证重点：必须保留人工法务复核；不能输出最终法律结论。
+
+4. `cross-border`
+   - 仓库：`noique/cross-border-ecommerce-skills`
+   - 定位：50 个跨境电商技能模板，覆盖品牌策略、Amazon 运营、选品、IP 风险、Listing、广告、财务、VOC 等。
+   - 业务价值：适合产品/市场做海外渠道、竞品、客户 VOC 和产品定位分析。
+   - 验证重点：License 为 CC BY-NC 4.0，商用或二次封装要注意授权；部分是模板，不等于自动化工具。
+
+5. `claude-finance` / finance skills
+   - 仓库线索：`himself65/finance-skills`、`openaccountant/skills`
+   - 定位：财务分析、市场数据、估值、财报、交易/投资研究等。
+   - 业务价值：对企业内部可迁移为经营分析、月度经营复盘、预算/费用/回款分析，而不是直接做投资建议。
+   - 验证重点：金融建议边界、数据源可信度、口径一致性、是否适合中国企业内部数据场景。
+
+### B. 有方向，但截图名称不够精确，需要继续确认具体实现
+
+6. `markdown`
+   - 线索：Microsoft MarkItDown、Nutrient PDF-to-Markdown、Word/PDF 转 Markdown Skills。
+   - 业务价值：非常适合企业知识库建设，把 PDF、Word、PPT、图片 OCR 转成可检索/可喂给 AI 的结构化 Markdown。
+   - 验证重点：中文 OCR、表格保真、扫描件质量、敏感文档脱敏。
+
+7. `llm-vtuber`
+   - 线索：Open-LLM-VTuber、Anima LLM Vtuber Template。
+   - 业务价值：更偏内容/直播/虚拟人方向，对我们短期管理和业务自动化价值不如趋势雷达、文档转换、XHS 运营明确。
+   - 验证重点：实时语音、形象版权、直播平台合规、成本和稳定性。
+
+### C. 更像基础设施，不是单一赚钱项目
+
+8. `skill-store`
+   - 线索：SkillsLLM、Awesome Skills、Claude Skills Marketplace、`npx skills add` 生态。
+   - 判断：它不是一个业务 Skill，更像技能分发/安装/索引基础设施。
+   - 业务价值：如果内部要做可复用能力库，可以借鉴“Skill Store”的索引、安装、版本、适配多个 Agent 的模式。
+   - 验证重点：供应链安全、Skill 注入风险、恶意脚本、版本漂移、License。
+
+### 下一步建议
+
+优先做两个低风险验证：
+
+1. `last30days`：拿一个真实业务关键词做趋势雷达，看输出能否支持市场/销售选题会。
+2. `markdown/文档转换`：拿公开 PDF 或手册样本转 Markdown，验证中文、表格、图片 OCR 和知识库可用性。
+
+`xhs-ops` 可以同步看，但先做“选题/拆解/复盘”，不直接发帖。`legal/finance/cross-border` 暂时只做辅助分析框架，不进入自动结论。
