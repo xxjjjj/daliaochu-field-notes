@@ -84,3 +84,22 @@ https://github.com/xxjjjj/daliaochu-field-notes/commits/main
 - 目的：验证自动同步机制
 - public_level：public
 - value_stage：已沉淀
+
+## 直接查看验证（不额外发测试消息）
+
+如果不想专门发测试消息，也可以直接看仓库本身验证：
+
+1. 打开最新提交：
+   https://github.com/xxjjjj/daliaochu-field-notes/commits/main
+
+2. 对照群里最近一次触发内容，检查最新 commit 是否有对应主题。
+
+3. 打开对应文件，检查是否满足：
+   - 路径正确：`notes/`、`experiments/`、`playbooks/` 或 `risks/`
+   - 内容不是群聊原文搬运
+   - 有结构化判断、业务价值、风险/待验证点和下一步
+   - 有 `public_level` 与 `value_stage`
+
+4. 如果群里每次触发后，GitHub 都能看到对应 commit 和文件变化，就说明链路在运行。
+
+测试消息不是必须，只是用于主动验收链路。日常使用时，直接看 GitHub 最新提交和文件内容就够。
