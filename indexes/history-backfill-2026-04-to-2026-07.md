@@ -1132,6 +1132,28 @@
 3. 处理 method-or-ai-concept：已形成稳定解释或方法的，抽象为 playbooks。
 4. 处理 file-or-media：先确认文件是否可公开、是否可下载解析；不确定时标记 needs-review。
 
+## 第四轮已写卡（本轮 2026-07-05 02:13 完成）
+
+- `notes/2026-05/2026-05-15-manager-eight-mindsets-question.md` (sanitized) — 管理者八大心智问答框架（与英领计划 Module 01 对齐，只沉淀自有理解和应用骨架，不固化讲师原课件原话术）
+- `notes/2026-06/2026-06-01-0g-qwen-hackathon-overview.md` (public) — 0G APAC + Qwen Cloud 黑客松赛道总览公开版，业余选手筛选标准 + 主办方"想白嫖什么"判断信号
+- `experiments/2026-05/2026-05-14-codex-smoke-error-investigation.md` (sanitized) — Codex smoke 报错调研：定位为 Codex 内置"敏感操作前预检"提示，cc-connect 输出过滤层需折叠
+- `playbooks/dnspod-resend-dns-records-setup.md` (public) — DNSPod + Resend 域名 DNS 三连记录（SPF / DKIM / Verification）配置 Playbook，附 dig 速查与 7 类常见坑
+
+## 第四轮剩余 / 下一轮继续方向
+
+1. `playbooks/hermes-default-model-rotation.md` —— GPT-5.4 / OpenAI / 内网 proxy 切换 Playbook（来自 `intco-modelhub-provider-setup.md` 同源线索，可合并或拆分）
+2. `notes/2026-06/2026-06-30-youtube-ai-creators.md` —— 已存在，下轮补充"普通人学 AI"主线判断
+3. `notes/2026-05/2026-05-15-manager-eight-mindsets-question.md` 下一步：补"劣答 → 优答"对照示例
+4. 6/03-6/06 期间的"模型是 Intco Proxy" / "切模型"对话已沉淀到 `intco-modelhub-provider-setup.md`，无需重复
+5. 6/27-6/30 期间部分 discussion 类条目（如"蒸馏同事""发布包上传"）仍属于操作噪声，待识别为高价值时再补
+6. 2026-06-27 candidate 8（"你把发布包发给我吧，我去上传发布一下"）→ 关联到 `experiments/2026-07/2026-07-04-flat-box-to-3d-mvp.md` 已覆盖，不再单独补卡
+
+## 第五轮建议方向
+
+- 优先盘点 candidate 列表里剩余的 `external-resource` 类型（待追源 URL），追到本体后补 notes
+- 跟进 2026-07-05 当日新消息（如有），识别新的高价值线索
+- 把已沉淀的 playbooks 做交叉引用（hermes-default-model-rotation ↔ intco-modelhub-provider-setup）
+
 ## 公开边界
 
 此清单来自群聊历史，只作为补录工作台公开；不包含完整群聊原文、内部系统细节、客户或真实业务数据。
