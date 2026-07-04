@@ -9,11 +9,14 @@
 
 ## 已读取概况
 
-- 已拉取消息数：230
-- 范围内消息数：230
-- 候选补录项：99
-- 当前最早读取到：2026-05-22 19:54
+- 已拉取消息数：2496（覆盖 2026-04-10 12:39 → 2026-07-05 00:28，2026-04 之前已无更多历史）
+- 范围内消息数：2496
+- 候选补录项：≥100（本轮新增多条）
+- 当前最早读取到：2026-04-10 12:39
 - 说明：此清单只保留摘要和判断，不公开完整群聊内容。
+- 历史补录轮次：
+  - 第一轮（2026-07-04）：覆盖 2026-05-22 至 2026-06-30，建立工作台 + 3 张卡
+  - 第二轮（2026-07-05）：覆盖 2026-04-10 至 2026-05-22，新增 6 张资料卡 + 1 张实验卡 + 1 张风险卡
 
 ## 分类统计
 
@@ -1088,6 +1091,13 @@
 - `notes/2026-04/2026-04-19-llm-wiki-skill-karpathy-methodology.md` (public)
 - `notes/2026-04/2026-04-12-resend-agent-friendly-email-api.md` (public)
 - `notes/2026-05/2026-05-09-cc-connect-local-agent-to-messenger-bridge.md` (public)
+- `notes/2026-04/2026-04-12-skills-sh-agent-skills-directory.md` (public) — skills.sh 跨 Agent Skill 注册中心
+- `notes/2026-05/2026-05-14-agent-im-bridges-landscape.md` (public) — agents-to-im / Claude-to-IM-skill / ClaudeTeam / clisbot / Kagura / cc-connect 横向对比
+- `notes/2026-05/2026-05-14-chatgpt-codex-cloud-and-claude-code-slack.md` (public) — Codex Cloud + Claude Code in Slack
+- `notes/2026-05/2026-05-22-tinyhumans-openhuman.md` (public) — tinyhumansai/openhuman 本地优先个人 AI 助手
+- `notes/2026-06/2026-06-02-openskills-colleague-skill.md` (public) — OpenSkills + Colleague.skill 数字分身赛道
+- `experiments/2026-04/2026-04-30-skill-graph-autopilot.md` (sanitized) — Skill Graph Autopilot v0 自进化路由
+- `risks/2026-05-wechat-personal-bridge-risk.md` (public) — 微信个人号桥接风险（ilinkai 通道）
 
 ## 待补卡（下一轮继续）
 - `notes/2026-04/2026-04-12-dnspod-and-resend-dns-record-setup.md` —— DNSPod 控制台 + Resend 三连 DNS 配置流程（公开版可脱敏）
@@ -1097,6 +1107,9 @@
 - `experiments/2026-05/2026-05-09-apply-patch-stuck-debug.md` —— apply_patch 反复卡死的调试过程
 - `experiments/2026-05/2026-05-14-codex-smoke-error-investigation.md` —— Codex smoke 报错调研
 - `notes/2026-05/2026-05-15-manager-eight-mindsets-question.md` —— 管理者八大心智问题框架（与英领计划对齐）
+- `notes/2026-06/2026-06-30-youtube-ai-creators.md` —— 已存在，下轮补充判断
+- `notes/2026-06/2026-06-01-0g-qwen-hackathon-overview.md` —— 0G APAC / Qwen Cloud Hackathon 赛道总览（公开版脱敏）
+- `experiments/2026-04/2026-04-29-skill-knowledge-graph-runtime-bridge.md` —— Skill Knowledge Graph 阶段 1-2 进度
 
 ## 下一轮处理顺序
 
