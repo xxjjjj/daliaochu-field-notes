@@ -1301,6 +1301,56 @@
 - 仓库地址：https://github.com/xxjjjj/daliaochu-field-notes
 - 最近 commit：见 `git log --oneline -5`
 
+## 第八轮已写卡（本轮 2026-07-05 04:30 完成）
+
+- `notes/2026-05/2026-05-12-formal-explain-once-stake-frame.md` (sanitized) — 「正式解释一次 + 拉起利益目标」团队规则重置框架，三段式（解释 → 重置规则 → 执行）+ 三件事必讲透（为什么重要 / 个人利害 / 规则是什么）+ 7 类适用场景 + 5 类不适用场景 + 6 个小实验
+- `notes/2026-05/2026-05-04-skill-as-storefront-business-model.md` (sanitized) — 「Skill = 卖场 / 异形 Skill / AI 即结果」业务模式脑洞，从"面馆 Skill"到"1688 倒卖 Skill"到"万物皆可 Skill + 分销"的递进判断 + 业务模式拆解 + 4 个验证问题 + MVP 实验路径
+- `notes/2026-05/2026-05-05-feishu-cli-multi-user-isolation.md` (sanitized) — 飞书 CLI 多用户隔离 + 隐私安全，从"嫂子开门"比喻出发的 OAuth Device Code + 每用户独立 token + 审计日志设计 + 6 个最小可行实验 + 4 类风险边界
+- `notes/2026-05/2026-05-13-remote-sandbox-vs-codex-sandbox.md` (sanitized) — 远程沙箱 vs Codex 沙箱 vs 本地沙箱边界讨论，"沙箱不是按工具分，是按动作分"的设计哲学 + 三种沙箱模式 + 5 个关键原则 + 风险转移 ≠ 风险消除
+
+## 第八轮补录判定
+
+- **本轮新成卡覆盖的高价值历史线索**（之前未识别）：
+  - 2026-05-04 23:21~23:59 「异形 Skill / Skill 进卖场 / AI 即结果」业务模式级脑洞 → `notes/2026-05/2026-05-04-skill-as-storefront-business-model.md`
+  - 2026-05-05 12:50~19:35 「飞书 CLI 多用户隔离 + 隐私安全 / 嫂子开门」 → `notes/2026-05/2026-05-05-feishu-cli-multi-user-isolation.md`
+  - 2026-05-12 07:06 「解释一下是不是可以拉起利益目标」 → `notes/2026-05/2026-05-12-formal-explain-once-stake-frame.md`（独立成卡，因为它是管理方法论而非心智问题清单）
+  - 2026-05-13 21:36~21:41 「远程沙箱概念 + 为啥 Codex 就要被限制」 → `notes/2026-05/2026-05-13-remote-sandbox-vs-codex-sandbox.md`
+- **本轮识别但暂不入库**（操作性 / 已有覆盖）：
+  - 2026-04-28 SSH / 一品虾 / 飞书机器人链路调试 → 运维故障排查，操作性强，复用价值低
+  - 2026-05-13 销售易客诉统计（手套粘连产品维度）→ 内部业务数据，private-only 不入公开仓库
+  - 2026-05-16 英领 AI 助手独立 gateway 配置 → 已并入 `hermes-agent-self-introduction.md` 的"可部署可扩展"语境
+  - 2026-05-16 项目立项会议待办数据脏乱 → 暂记为 `experiments/` 待追源候选，需要更具体的样本
+  - 2026-06-15~26 中段空窗 → 仍无新增用户原始线索，仅有 /new / 通了等操作性消息
+  - 2026-07-05 之后实时消息 → 仅有 Round 2/3 sync 消息，无新增用户原始线索
+
+## 第八轮剩余 / 下一轮继续方向
+
+1. **三件套反向引用**：把 `notes/2026-05/2026-05-12-formal-explain-once-stake-frame.md` 也加入"BP / ITBP 管理方法论"系列，建立与 `manager-eight-mindsets-question.md` 的交叉引用
+2. **"Skill = 卖场" 业务脑洞的 MVP 验证**：建议下一轮跟进是否启动公司电商的 MVP 实验
+3. **飞书 CLI 多用户隔离现状盘点**：评估 lark-cli 当前是否已实现多用户 token 隔离，补一份"现状 vs 目标"对比表
+4. **远程沙箱试用记录**：找 1-2 个远程沙箱服务（E2B / Daytona）实测，记录延迟 / 成本 / 隔离边界
+5. **跨卡交叉引用**：
+   - `formal-explain-once-stake-frame.md` ↔ `manager-eight-mindsets-question.md`
+   - `feishu-cli-multi-user-isolation.md` ↔ `codex-device-code-auth-flow.md`
+   - `remote-sandbox-vs-codex-sandbox.md` ↔ `codex-entry-from-feishu.md`
+   - `skill-as-storefront-business-model.md` ↔ `flat-box-to-3d-mvp.md`（如未来启动 MVP）
+
+## 统计更新（第八轮后）
+
+- 本轮新增 notes：4 张（全部 sanitized）
+- 本轮新增 templates / indexes / playbooks / experiments / risks：0 张
+- 累计已写卡（含前七轮）：≈ 48+ 张
+- 仓库地址：https://github.com/xxjjjj/daliaochu-field-notes
+- 最近 commit：见 `git log --oneline -5`
+
+## 第九轮建议方向
+
+- 把本轮 4 张新卡与现有卡建立交叉引用（5 分钟可做完）
+- 跟进 2026-07-05 之后新消息（实时识别高价值线索）
+- 评估是否启动「Skill = 卖场」MVP（公司电商手套产品）
+- 飞书 CLI 多用户隔离现状盘点（lark-cli 是否已支持 scope 拆分）
+- 远程沙箱实测对比（E2B vs Daytona vs Modal vs Fly）
+
 ## 公开边界
 
 此清单来自群聊历史，只作为补录工作台公开；不包含完整群聊原文、内部系统细节、客户或真实业务数据。
