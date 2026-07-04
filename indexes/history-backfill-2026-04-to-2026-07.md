@@ -1157,3 +1157,66 @@
 ## 公开边界
 
 此清单来自群聊历史，只作为补录工作台公开；不包含完整群聊原文、内部系统细节、客户或真实业务数据。
+
+## 第五轮已写卡（本轮 2026-07-05 02:46 完成）
+
+- `notes/2026-06/2026-06-28-hermes-agent-self-introduction.md` (public) — Hermes Agent 一句话定义 + 六层能力拆解（对话与任务执行 / 多平台入口 / Skill 技能机制 / 长期记忆与个人化 / 工具与系统集成 / 可部署可扩展）
+- `notes/2026-06/2026-06-28-hermes-heartbeat-mechanism-finding.md` (public) — Hermes 心跳机制现状盘点 + "心跳 + 自愈"补充方案（launchd / systemd watchdog）
+- `notes/2026-06/2026-06-06-net-ease-uu-remote-mac.md` (public) — 网易 UU 远程 for Mac v4.26.0 工具评估（免费 4K 144 帧远控 + 同类工具对比 + 适用场景判断）
+- `notes/2026-06/2026-06-27-plain-language-translator-cross-platform-package.md` (sanitized) — 人话翻译机 Skill 跨平台发布包结构设计：core + adapters 三段式
+- `notes/2026-06/2026-06-30-agent-self-investigation-vague-user-request.md` (sanitized) — Agent 自查流程：当用户说"我记得装了 X 工具"时怎么找（三轮检索 + 多线索交叉）
+- `playbooks/plain-language-translator-patterns.md` (public) — 补充 GEO 餐厅/朋友类比 + "现实里 GEO 怎么做"7 条 + "SEO vs GEO" 一句话区别（基于 2026-06-29 详细调用样本）
+
+## 第五轮补录判定
+
+- **已合并 / 已在现有卡覆盖**（不再单独补卡）：
+  - Candidate #1（2026-06-30 14:32 YouTube AI 视频推荐）→ `notes/2026-06/2026-06-30-youtube-ai-creators.md` + 完整调用记录已在索引
+  - Candidate #3（2026-06-29 09:04 GEO 翻译）→ `playbooks/plain-language-translator-patterns.md` 已扩展
+  - Candidate #4（2026-06-28 22:53 人话翻译机 Skill 自证）→ `playbooks/plain-language-translator-patterns.md` §10 来源已记
+  - Candidate #5（2026-06-28 22:50 Loop Engineering 翻译）→ `playbooks/plain-language-translator-patterns.md` §3.2 已记
+  - Candidate #6（2026-06-28 15:37 心跳机制）→ 单独成卡 `2026-06-28-hermes-heartbeat-mechanism-finding.md`
+  - Candidate #7（2026-06-28 15:35 Hermes Agent 介绍）→ 单独成卡 `2026-06-28-hermes-agent-self-introduction.md`
+  - Candidate #8（2026-06-27 15:09 发布包上传）→ 关联卡 `2026-06-27-plain-language-translator-cross-platform-package.md` 已记路径
+  - Candidate #9（2026-06-27 15:08 人话翻译机发布包）→ 同上
+  - Candidate #10（2026-06-27 08:55 TDD 翻译）→ `playbooks/plain-language-translator-patterns.md` §3.1 已记
+  - Candidate #35（2026-06-05 16:42 OpenAI device callback）→ `playbooks/codex-device-code-auth-flow.md` 已记
+  - Candidate #55（2026-06-01 21:40 抖音 $150K 黑客松）→ `notes/2026-06/2026-06-01-ai-web3-hackathon-trends.md` 已记
+  - Candidate #58 / #59（2026-06-01 黄锋候选人 PDF + 候选人分析）→ private-only，仅内部保留
+  - Candidate #61 / #67 / #73（2026-06-01 飞书 Bitable / Wiki 链接）→ 内部私域，不公开
+  - Candidate #78 / #82 / #85（2026-05-28 半年度汇报飞书云文档）→ `notes/2026-05/2026-05-28-half-year-report-content-method.md` 已记
+  - Candidate #89 / #91（2026-05-26 Wiki → PDF）→ `playbooks/feishu-wiki-pdf-export-no-pagebreaks.md` 已记
+
+- **本轮新成卡覆盖的候选**：
+  - Candidate #25（2026-06-06 20:19 uuyc_4.26.0.pkg）→ `notes/2026-06/2026-06-06-net-ease-uu-remote-mac.md`
+  - Candidate #2（2026-06-30 09:32 EDM 工具自查）→ `notes/2026-06/2026-06-30-agent-self-investigation-vague-user-request.md`
+  - Candidate #6（2026-06-28 15:37 心跳机制）→ `notes/2026-06/2026-06-28-hermes-heartbeat-mechanism-finding.md`
+  - Candidate #7（2026-06-28 15:35 Hermes Agent 介绍）→ `notes/2026-06/2026-06-28-hermes-agent-self-introduction.md`
+  - Candidate #8 / #9（2026-06-27 15:08/09 人话翻译机发布包）→ `notes/2026-06/2026-06-27-plain-language-translator-cross-platform-package.md`
+
+## 第五轮剩余 / 下一轮继续方向
+
+1. **黄锋候选人分析实验**（Candidate #59）→ 标记为 private-only，仅内部保留方法论（候选人分析四维框架：值不值得培养 / 潜力 / 风险 / 未来路径适配），不公开任何真实候选人信息
+2. **离职资源回收场景的进一步细化**（Candidate #74 #75 #76）→ 已有 `leaver-resource-cleanup-checklist.md`，但「从去年三月开始」+ 「6 位老师」的具体场景可作为另一个 sub-case 沉淀为实验卡
+3. **候选人评估实验的方法论抽取**（Candidate #59）→ 候选人分析评估模板 + 面试官脚本生成模板值得沉淀为可复用 Playbook（脱敏后）
+4. **iOS / 招聘 / 销售易反写 B1 多维表格**（Candidate #63 #64）→ 操作性场景，未识别为高价值线索，可观察后续是否复用
+5. **2026-07-04 后新消息**（如 2026-07-05 后产生的实时消息）→ 下轮拉取并识别
+6. **2026-05-22 之前的更早历史** → 飞书 API 已确认最早可拉到 2026-04-10 12:39，04-10 之前无更多历史
+7. **跨卡交叉引用**：`hermes-agent-self-introduction.md` ↔ `playbooks/codex-entry-from-feishu.md` ↔ `hermes-heartbeat-mechanism-finding.md` 三个可形成"Hermes 三件套"导航
+
+## 第六轮建议方向
+
+- 把候选人评估模板脱敏成可复用 Playbook（private-only，仅内部）
+- 跟进 2026-07-05 当日及后续新消息（实时识别高价值线索）
+- 整理"Hermes 三件套"导航索引页（self-introduction + heartbeat + codex-entry）
+- 盘点 candidate 列表里剩余的 discussion / file-or-media 中可能被忽略的方法论信号
+
+## 统计更新（第五轮后）
+
+- 本轮新增 notes：5 张
+- 本轮新增 playbooks 更新：1 张（扩展）
+- 本轮新增 experiments：0 张
+- 本轮新增 risks：0 张
+- 累计已写卡（含前四轮）：≈ 40+ 张
+- 仓库地址：https://github.com/xxjjjj/daliaochu-field-notes
+- 最近 commit：见 `git log --oneline -5`
+
