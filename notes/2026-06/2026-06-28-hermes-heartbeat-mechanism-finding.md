@@ -223,3 +223,5 @@ if not check():
 - `playbooks/auto-sync-validation.md` — 自动同步任务的健康检查思路
 - `notes/2026-06/2026-06-28-hermes-agent-self-introduction.md` — Hermes 整体能力拆解
 - `risks/2026-05-wechat-personal-bridge-risk.md` — 类似"个人号桥接"场景的稳定性风险
+
+> ← 属于 [Hermes 三件套](../../indexes/hermes-trio-navigation.md) 之「心跳机制」；同套还有 [自我介绍](../../notes/2026-06/2026-06-28-hermes-agent-self-introduction.md) 与 [Codex 入口](../../playbooks/codex-entry-from-feishu.md)。

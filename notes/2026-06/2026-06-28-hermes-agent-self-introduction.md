@@ -168,3 +168,5 @@ hermes-agent/
 - `playbooks/hermes-default-model-rotation.md` — 默认模型轮换
 - `notes/2026-06/2026-06-02-colleague-skill-runtime-design.md` — Skill Runtime 设计
 - `playbooks/plain-language-translator-patterns.md` — 人话翻译机 Skill 实战
+
+> ← 属于 [Hermes 三件套](../../indexes/hermes-trio-navigation.md) 之「自我介绍」；同套还有 [心跳机制](../../notes/2026-06/2026-06-28-hermes-heartbeat-mechanism-finding.md) 与 [Codex 入口](../../playbooks/codex-entry-from-feishu.md)。

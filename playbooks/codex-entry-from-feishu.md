@@ -64,3 +64,5 @@ tags: [codex, openclaw, hermes, cc-connect, feishu]
 1. 在沙箱实测 A 路径的串线风险。
 2. 把 B 路径的 apply_patch 问题彻底解决（升级或替换工具）。
 3. 评估 D 路径：飞书 → Codex MCP Server（如果 Codex 提供 MCP 接口）。
+
+> ← 属于 [Hermes 三件套](../indexes/hermes-trio-navigation.md) 之「Codex 入口」；同套还有 [自我介绍](../notes/2026-06/2026-06-28-hermes-agent-self-introduction.md) 与 [心跳机制](../notes/2026-06/2026-06-28-hermes-heartbeat-mechanism-finding.md)。

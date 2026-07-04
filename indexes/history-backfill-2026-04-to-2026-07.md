@@ -1210,13 +1210,50 @@
 - 整理"Hermes 三件套"导航索引页（self-introduction + heartbeat + codex-entry）
 - 盘点 candidate 列表里剩余的 discussion / file-or-media 中可能被忽略的方法论信号
 
-## 统计更新（第五轮后）
+## 第六轮已写卡（本轮 2026-07-05 03:21 完成）
 
-- 本轮新增 notes：5 张
-- 本轮新增 playbooks 更新：1 张（扩展）
+- `indexes/hermes-trio-navigation.md` (public) — Hermes 三件套导航：自我介绍 / 心跳机制 / Codex 入口 的关系图 + 适用人群一句话索引 + 跳转链
+- `playbooks/candidate-evaluation-framework.md` (private-only) — 候选人评估四维度框架（值不值得培养 / 潜力 / 风险 / 未来路径适配）+ 面试官脚本生成模板 + 评估记录表（脱敏骨架），仅内部使用，公开仓库只保留方法论
+- `indexes/README.md` (public) — 索引总览更新，加入 `hermes-trio-navigation` 已维护项
+
+## 第六轮补录判定
+
+- **已合并 / 已在现有卡覆盖**（不再单独补卡）：
+  - Candidate #47 #48 #49（2026-06-02 01:32~01:39 Hermes 魔改 / 千问平台 / 获奖概率）→ 已并入 `notes/2026-06/2026-06-28-hermes-agent-self-introduction.md` 的"定制与魔改"语境
+  - Candidate #50 #51 #52 #53 #54（2026-06-01 21:41~22:02 黑客松 - 大多在真实系统 / 想白嫖 / 48 岁 / 黑话听不懂 / 怎么参加）→ `notes/2026-06/2026-06-01-ai-web3-hackathon-trends.md` 已覆盖
+  - Candidate #94 #95 #96 #97 #98 #99（2026-05-22 19:54~20:03 蒸馏同事 / openhuman / wiki）→ 已并入 `notes/2026-05/2026-05-22-tinyhumans-openhuman.md` + `notes/2026-06/2026-06-02-colleague-skill-runtime-design.md`
+  - Candidate #29 GEO（2026-06-29 09:04~09:05）→ `playbooks/plain-language-translator-patterns.md` Round 5 扩展段已含 GEO 餐厅类比 + 7 条现实做法
+  - Candidate #38（2026-06-05 16:27 Codex 绑定 crystalxu@intco.com）→ `playbooks/codex-device-code-auth-flow.md` 已记 ChatGPT Team 场景
+- **本轮新成卡覆盖的候选**：
+  - Candidate #59（2026-06-01 14:53 黄锋候选人评估）→ `playbooks/candidate-evaluation-framework.md`（private-only，只取方法论，不含真实候选人信息）
+  - Candidate #7 + #6 + codex-entry 群组讨论（2026-06-28 自我介绍 + 心跳机制 + 2026-05-14 入口之争）→ `indexes/hermes-trio-navigation.md` 整合为导航
+
+## 第六轮剩余 / 下一轮继续方向
+
+1. **Hermes 三件套反向索引**：把已存在的 notes/2026-06/2026-06-28-hermes-agent-self-introduction.md / heartbeat-finding.md / playbooks/codex-entry-from-feishu.md 各自加上"← 参见 Hermes 三件套导航"回链
+2. **2026-07-05 之后实时消息跟踪**：当前 cron 仅识别到 Round 2/3 同步消息，无新增用户原始线索；下一轮持续观察
+3. **2026-06-15~26 中段空窗**：候选清单中这一段时间没识别到高价值线索，可能本来就没活动；如有新消息再补
+4. **候选人评估 Playbook 实操验证**：建议内部在 1-2 次真实招聘场景中跑一遍四维度框架，回来补"易踩坑"段
+
+## 第七轮建议方向
+
+- 把三件套三张卡都加回链到 `indexes/hermes-trio-navigation.md`
+- 跟进新消息
+- 把 `playbooks/candidate-evaluation-framework.md` 的"评估记录表（脱敏骨架）"做一份空表样例，放到 `templates/`
+- 评估是否需要"打捞处群内 30 天高价值线索速查"类目，按月聚合可加速下次群历史补录
+
+## 统计更新（第六轮后）
+
+- 本轮新增 indexes：2 张（导航 + README 更新）
+- 本轮新增 playbooks：1 张（private-only）
+- 本轮新增 notes：0 张
 - 本轮新增 experiments：0 张
 - 本轮新增 risks：0 张
-- 累计已写卡（含前四轮）：≈ 40+ 张
+- 累计已写卡（含前五轮）：≈ 42+ 张
 - 仓库地址：https://github.com/xxjjjj/daliaochu-field-notes
 - 最近 commit：见 `git log --oneline -5`
+
+## 公开边界
+
+此清单来自群聊历史，只作为补录工作台公开；不包含完整群聊原文、内部系统细节、客户或真实业务数据。
 
