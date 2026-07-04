@@ -1253,6 +1253,54 @@
 - 仓库地址：https://github.com/xxjjjj/daliaochu-field-notes
 - 最近 commit：见 `git log --oneline -5`
 
+## 第七轮建议方向
+
+- 把三件套三张卡都加回链到 `indexes/hermes-trio-navigation.md`
+- 跟进新消息
+- 把 `playbooks/candidate-evaluation-framework.md` 的"评估记录表（脱敏骨架）"做一份空表样例，放到 `templates/`
+- 评估是否需要"打捞处群内 30 天高价值线索速查"类目，按月聚合可加速下次群历史补录
+
+## 第七轮已写卡（本轮 2026-07-05 03:55 完成）
+
+- `templates/candidate-evaluation-form.md` (private-only) — 候选人评估记录表脱敏骨架，对应 `playbooks/candidate-evaluation-framework.md` §4.4 的可直接打印/抄写最小版本；包含基本信息、四大维度评估区、综合输出、销毁/归档四个区域；身份信息全占位；仅本地留存
+- `notes/2026-05/2026-05-26-internal-tool-launch-wechat-announcement.md` (sanitized) — 内部工具发布到微信大群的"功能宣传 + 操作指南"双轨文案方法论，5 段式微信群正文骨架 + 三段式 PDF 操作指南骨架 + 7 个常见坑 + 第一版 vs 第二版对比；适用于任何内部 AI 工具 / SaaS / 流程改造的内部推广
+
+## 第七轮补录判定
+
+- **已合并 / 已在现有卡覆盖**（不再单独补卡）：
+  - 2026-05-26 14:07 → 15:04 Wiki → PDF 反复迭代 → `playbooks/feishu-wiki-pdf-export-no-pagebreaks.md` 已记，含第一版分页 + 第二版空白 + 第三版正常三个版本的修复路径
+  - 2026-06-04 08:23 / 2026-06-06 19:20~20:01 「切 Intco Proxy / 现在用的什么模型」一连串对话 → `playbooks/intco-modelhub-provider-setup.md` 已记
+  - 2026-05-12 03:36~03:40 「催了很多遍没用 / 管理权威被稀释」 → 暂标记为 `manager-eight-mindsets-question.md` 的扩展素材，未单独成卡（管理场景已有多张卡覆盖）
+  - 2026-05-12 07:06 「解释一下是不是可以拉起利益目标」 → 暂标记为待追源；下一轮决定是作为 `manager-eight-mindsets-question.md` 的"正式解释一次"附录，还是单独成"利益目标 + 解释义务"卡
+- **本轮新成卡覆盖的候选**：
+  - Candidate #87（2026-05-26 15:58 微信大群分享功能文案）→ `notes/2026-05/2026-05-26-internal-tool-launch-wechat-announcement.md`（双轨文案方法论 + 5 段式骨架 + 7 个常见坑）
+- **本轮新增模板**：
+  - `templates/candidate-evaluation-form.md`（对应 `playbooks/candidate-evaluation-framework.md` §4.4 的实操模板）
+
+## 第七轮剩余 / 下一轮继续方向
+
+1. **2026-05-12 07:06「利益目标 + 解释义务」** → 下一轮决定是作为附录并入 `manager-eight-mindsets-question.md`，还是单独成卡（建议附录，主题更连贯）
+2. **"打捞处群内 30 天高价值线索速查"按月聚合** → 当前每日聚合已够用，月度聚合收益不明显；建议下一轮评估是否真有必要再做一份月度总览索引
+3. **2026-06-15~26 中段空窗** → 候选清单中这段没识别到高价值线索，可能本就没活动；持续观察
+4. **2026-07-05 之后实时消息跟踪** → 当前 cron 仅识别到 Round 2/3 sync 消息，无新增用户原始线索；下一轮持续观察
+5. **候选人评估模板实操验证** → 建议在内部 1-2 次真实招聘场景中试用 `templates/candidate-evaluation-form.md`，回来补"易踩坑"段
+
+## 第八轮建议方向
+
+- 把 2026-05-12 07:06 「利益目标 + 解释义务」并入 `manager-eight-mindsets-question.md` 作为附录（"正式解释一次"框架）
+- 跟进 2026-07-05 之后新消息（实时识别高价值线索）
+- 在 1-2 次真实招聘场景中跑一遍 `templates/candidate-evaluation-form.md`，回来补"易踩坑"段
+- 评估 `notes/2026-05/2026-05-26-internal-tool-launch-wechat-announcement.md` 的可复用度：找一次实际工具发布场景套用，看 5 段式骨架需不需要再调
+
+## 统计更新（第七轮后）
+
+- 本轮新增 notes：1 张（sanitized）
+- 本轮新增 templates：1 张（private-only）
+- 本轮新增 indexes / playbooks / experiments / risks：0 张
+- 累计已写卡（含前六轮）：≈ 44+ 张
+- 仓库地址：https://github.com/xxjjjj/daliaochu-field-notes
+- 最近 commit：见 `git log --oneline -5`
+
 ## 公开边界
 
 此清单来自群聊历史，只作为补录工作台公开；不包含完整群聊原文、内部系统细节、客户或真实业务数据。
