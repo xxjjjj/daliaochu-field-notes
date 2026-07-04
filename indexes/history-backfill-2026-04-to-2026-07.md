@@ -17,6 +17,7 @@
 - 历史补录轮次：
   - 第一轮（2026-07-04）：覆盖 2026-05-22 至 2026-06-30，建立工作台 + 3 张卡
   - 第二轮（2026-07-05）：覆盖 2026-04-10 至 2026-05-22，新增 6 张资料卡 + 1 张实验卡 + 1 张风险卡
+  - 第三轮（2026-07-05 01:36）：覆盖 2026-04-29 / 2026-05-11 / 2026-05-26 / 2026-05-28 / 2026-06-01 / 2026-06-02 / 2026-06-04 / 2026-06-05 / 2026-06-27 / 2026-06-28，新增 2 张资料卡 + 4 张 Playbook + 3 张实验卡
 
 ## 分类统计
 
@@ -1098,6 +1099,19 @@
 - `notes/2026-06/2026-06-02-openskills-colleague-skill.md` (public) — OpenSkills + Colleague.skill 数字分身赛道
 - `experiments/2026-04/2026-04-30-skill-graph-autopilot.md` (sanitized) — Skill Graph Autopilot v0 自进化路由
 - `risks/2026-05-wechat-personal-bridge-risk.md` (public) — 微信个人号桥接风险（ilinkai 通道）
+
+## 第三轮已写卡（本轮 2026-07-05 01:36 完成）
+
+- `notes/2026-06/2026-06-01-ai-web3-hackathon-trends.md` (sanitized) — 2026 H1 AI / Web3 黑客松赛道盘点 + 小白友好筛选标准
+- `notes/2026-06/2026-06-02-colleague-skill-runtime-design.md` (public) — 黑客松作品方向碰撞出的 Colleague Skill Runtime 产品定位
+- `experiments/2026-06/2026-06-01-plain-language-village-translator.md` (public) — 村口大白话翻译机：把 AI/Web3 黑话翻译给 48 岁非技术老板
+- `playbooks/codex-device-code-auth-flow.md` (sanitized) — Codex Device Code 授权流程（含 chat.openai.com callback 链路）
+- `playbooks/intco-modelhub-provider-setup.md` (sanitized) — IntcoModelHub provider 重命名 + 模型清单 + 网关切换
+- `playbooks/feishu-wiki-pdf-export-no-pagebreaks.md` (sanitized) — 飞书 Wiki → 不分页 PDF（含 docx / md / weasyprint 三套路径）
+- `playbooks/leaver-resource-cleanup-checklist.md` (sanitized) — 离职/停合作员工资源回收清单（5 类资源 + 3 优先级）
+- `playbooks/plain-language-translator-patterns.md` (public) — 人话翻译机 Skill 实战模式汇总（TDD/Loop Engineering/GEO/心跳）
+- `experiments/2026-05/2026-05-11-auto-reminder-requirement-extraction.md` (sanitized) — 跟单提效｜收款预警降噪与自动催款 MVP 抽取
+- `experiments/2026-04/2026-04-29-skill-knowledge-graph-runtime-bridge.md` (sanitized) — Skill Knowledge Graph Runtime Bridge 阶段盘点
 
 ## 待补卡（下一轮继续）
 - `notes/2026-04/2026-04-12-dnspod-and-resend-dns-record-setup.md` —— DNSPod 控制台 + Resend 三连 DNS 配置流程（公开版可脱敏）
