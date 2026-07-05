@@ -155,3 +155,8 @@ Access Key / 密码 / 登录 / 接口 / 地址 / 配置 / bot / 机器人 /
 - 封装成 Skill：`leaver-resource-cleanup`（输入人员清单 + 时间范围，输出 5 类回收清单 + 优先级）
 - 沉淀"沉睡资源定期审计"子 Playbook（每季度跑一次）
 - 与企业内部 IdP / SaaS 管理平台打通，实现半自动回收
+
+## 11. 相关卡（交叉引用）
+
+- **现状盘点（Round 10）**：`notes/2026-07/2026-07-05-feishu-cli-multi-user-isolation-status-check.md` — §6 用本 Playbook 横向验证飞书 CLI 多用户隔离的离职回收可行性，发现 `feishu_cli_profiles.json` 没有 TTL 字段、长期不用的 profile 不会被自动清理
+- 同源凭证安全风险：`notes/2026-05/2026-05-05-feishu-cli-multi-user-isolation.md`

@@ -236,6 +236,10 @@ MVP 阶段可以先用：
 - `playbooks/codex-device-code-auth-flow.md` — 同一套 OAuth Device Code 机制在 Codex CLI 场景的具体落地方案，本卡是多用户隔离的"机制设计"
 - `playbooks/feishu-topic-history-backfill.md` — 用 OAuth User Token + 多用户隔离原则做飞书话题群历史补录的具体 Playbook
 - `risks/historical-chat-backfill-boundary.md` — 多用户隔离原则在群历史补录场景的公开边界注意事项
+- **本设计 2 个月后的现状盘点（Round 10）**：`notes/2026-07/2026-07-05-feishu-cli-multi-user-isolation-status-check.md` — 对比设计目标 vs 实际部署，识别 2 红 / 1 黄 / 3 绿；最关键的发现是 `capabilities` 字段没真做拦截 + OAuth Device Code 链路 28/28 失败
+- 离职资源回收（横向验证现状盘的可行性）：`playbooks/leaver-resource-cleanup-checklist.md`
+- 微信个人号桥接风险（同类「凭证共享」风险）：`risks/2026-05-wechat-personal-bridge-risk.md`
+- 远程沙箱边界（同源「本地默认凭证不安全」思路）：`notes/2026-05/2026-05-13-remote-sandbox-vs-codex-sandbox.md`
 
 ## 12. 公开边界
 

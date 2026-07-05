@@ -130,6 +130,7 @@ model:
 
 - `notes/2026-05/2026-05-05-feishu-cli-multi-user-isolation.md` — 同一套 OAuth Device Code 机制在多用户隔离场景的设计原理
 - `playbooks/codex-entry-from-feishu.md` — 认证之后如何从飞书侧驱动 Codex 的入口选择
+- **现状盘点（Round 10）**：`notes/2026-07/2026-07-05-feishu-cli-multi-user-isolation-status-check.md` — 实际部署后发现 OAuth Device Code 链路 28/28 失败，需要排查 callback / verification URL 
 
 ## 11. 下一步
 

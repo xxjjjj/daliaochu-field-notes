@@ -1389,6 +1389,36 @@
 - Hermes 默认模型轮换 Playbook 补全
 - 候选清单（99 项）剩余未覆盖部分已经全部识别为"已覆盖 / 操作性 / private-only"，建议下一轮重置工作台，按"消息窗口轮转"逻辑拉新一段历史
 
+## 第十轮已写卡（本轮 2026-07-05 12:02 完成）
+
+- `notes/2026-07/2026-07-05-feishu-cli-multi-user-isolation-status-check.md` (sanitized) — 飞书 CLI 多用户隔离现状盘点（2 个月后回头看），对比 Round 8 设计目标 vs 2026-07-05 当下文件系统快照 / 审计日志（lark-cli-guard.jsonl 166 条 + feishu-delegate-auth.jsonl 126 条）；识别 2 个红（scope 拆分未真落 + OAuth Device Code 100% 失败）、1 个黄（5/22 后 guard log 静默）、3 个绿；含行动建议 + 离职资源回收横向验证
+- 索引文件追加本轮记录 + 第十一轮建议方向
+
+## 第十轮补录判定
+
+- **覆盖范围验证**：最新一次完整抓取 2026-07-05 12:02 完成，总量 2500 条，时间窗 2026-04-10 12:39 → 2026-07-05 04:38（恰好 3 个月）；与 Round 9 末尾的 2496 条相比，新增 4 条，全部为 2026-07-05 当日的 sync 消息，无新增用户原始线索
+- **本轮新成卡覆盖的方向**：
+  - 飞书 CLI 多用户隔离现状盘点（Round 10 建议方向第 3 项）→ `notes/2026-07/2026-07-05-feishu-cli-multi-user-isolation-status-check.md`
+- **本轮识别但暂不入库**（待确认或需业务决策）：
+  - 「Skill = 卖场」MVP（公司手套产品）→ 业务决策，不是写作任务，需陈总判断
+  - 远程沙箱实测对比（E2B / Daytona / Modal / Fly）→ 需要真实验测 + 资源消耗，不是 cron 单轮可完成
+  - Hermes 默认模型轮换 Playbook 补全 → 已在 `playbooks/hermes-default-model-rotation.md` + `playbooks/intco-modelhub-provider-setup.md` 覆盖大部分
+- **本轮识别的安全风险（已写入新卡 §5）**：
+  - 🔴 红：scope 级 capability 控制在 manifest 里写了但 wrapper 没真做拦截
+  - 🔴 红：OAuth Device Code 链路 28/28 失败，最近一次 7/3 之后没人调通
+  - 🟡 黄：5/22 之后 guard log 静默，可能 PATH 失效导致绕过 wrapper
+
+## 第十一轮建议方向
+
+- **优先修复两个红**：
+  1. 给 `~/.hermes/bin/lark-cli` wrapper 加 capability 维度的二次校验，让 `capabilities` 字段从元数据变执行约束
+  2. 排查 OAuth Device Code callback / verification URL 链路，写一个 5 行最小测试（手动跑一次 + 等 60s + 检查落库）
+- **优先确认一个黄**：抽查当前 `which lark-cli` 在 zsh / bash / IDE 内嵌终端里分别指向哪，确认 PATH 优先级未失效
+- **业务决策待陈总拍板**：
+  - 「Skill = 卖场」是否启动 MVP（公司电商手套产品）
+  - 是否要做远程沙箱实测对比
+- **跟进**：2026-07-05 之后实时消息（如有新用户原始线索）；如 24 小时内无新线索，可考虑重置工作台为「月度聚合」视角
+
 ## 公开边界
 
 此清单来自群聊历史，只作为补录工作台公开；不包含完整群聊原文、内部系统细节、客户或真实业务数据。
