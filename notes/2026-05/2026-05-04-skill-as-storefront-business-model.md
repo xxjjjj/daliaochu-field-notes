@@ -206,7 +206,13 @@ public_level: sanitized
 
 **绝对不要直接 All-in**。这是脑洞，不是蓝图。
 
-## 11. 公开边界
+## 11. 相关卡（交叉引用）
+
+- `experiments/2026-07/2026-07-04-flat-box-to-3d-mvp.md` — 同一类"业务脑洞 → MVP 实验"路径的早期样本（纸盒 3D 化），可对比方法论
+- `notes/2026-05/2026-05-12-formal-explain-once-stake-frame.md` — Skill 卖场要落地，"立规则 + 利益绑定"是必经一步
+- `notes/2026-06/2026-06-02-colleague-skill-runtime-design.md` — 同事 Skill / 蒸馏场景，是"异形 Skill"路径里"内部能力货架"的最小形态
+
+## 12. 公开边界
 
 - 不公开具体公司、具体产品、具体业务数据。
 - 不公开具体投资金额、组织架构、人员配置。

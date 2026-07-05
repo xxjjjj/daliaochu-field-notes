@@ -1351,6 +1351,44 @@
 - 飞书 CLI 多用户隔离现状盘点（lark-cli 是否已支持 scope 拆分）
 - 远程沙箱实测对比（E2B vs Daytona vs Modal vs Fly）
 
+## 第九轮已写卡（本轮 2026-07-05 完成）
+
+- `notes/2026-05/2026-05-12-formal-explain-once-stake-frame.md` 追加 `## 11. 相关卡（交叉引用）` 段，链接到 `manager-eight-mindsets-question.md` 与 `plain-language-translator-patterns.md`
+- `notes/2026-05/2026-05-04-skill-as-storefront-business-model.md` 追加 `## 11. 相关卡（交叉引用）` 段，链接到 `flat-box-to-3d-mvp.md` / `formal-explain-once-stake-frame.md` / `colleague-skill-runtime-design.md`
+- `notes/2026-05/2026-05-05-feishu-cli-multi-user-isolation.md` 追加 `## 11. 相关卡（交叉引用）` 段，链接到 `codex-device-code-auth-flow.md` / `feishu-topic-history-backfill.md` / `historical-chat-backfill-boundary.md`
+- `notes/2026-05/2026-05-13-remote-sandbox-vs-codex-sandbox.md` 追加 `## 11. 相关卡（交叉引用）` 段，链接到 `codex-entry-from-feishu.md` / `cc-connect-local-agent-to-messenger-bridge.md` / `intco-modelhub-provider-setup.md`
+- `notes/2026-05/2026-05-15-manager-eight-mindsets-question.md` 追加 `## 9. 相关卡（交叉引用）` 段，反向链接到 `formal-explain-once-stake-frame.md`
+- `playbooks/codex-device-code-auth-flow.md` 追加 `## 10. 相关卡（交叉引用）` 段，链接到 `feishu-cli-multi-user-isolation.md` / `codex-entry-from-feishu.md`
+- `playbooks/codex-entry-from-feishu.md` `## 6. 关联` 追加 `remote-sandbox-vs-codex-sandbox.md` 引用
+- `experiments/2026-07/2026-07-04-flat-box-to-3d-mvp.md` 追加 `## 11. 相关卡（交叉引用）` 段，链接到 `skill-as-storefront-business-model.md`
+- `notes/2026-06/2026-06-30-ai-learning-youtube-videos-for-beginners.md` (public) — 普通人入门 AI 的 3 个 YouTube 视频（地图 29 min / 动手 25 min / 百科 10 h 跳看），按"学习曲线"分层路径；与 youtube-ai-creators.md 互补（频道 vs 单次视频）
+- `risks/2026-06-30-edm-tooling-naming-confusion.md` (private-only) — EDM 工具命名混淆：msmtp / Focussend / 询盘云 CRM 的边界；不在公开仓库；提醒离职人员凭证清点必须按工具分别列出，不能合并
+
+## 第九轮补录判定
+
+- **已完成（交叉引用）**：4 张 Round 8 新卡 + 3 张目标卡 共 8 处 cross-link 补齐
+- **本轮新成卡覆盖的高价值线索**：
+  - Candidate #1（2026-06-30 14:32 普通人 AI 视频油管热门）→ `notes/2026-06/2026-06-30-ai-learning-youtube-videos-for-beginners.md`（具体 3 个视频，与 youtube-ai-creators.md 频道清单互补）
+  - Candidate #2（2026-06-30 09:32 EDM 工具命名混淆）→ `risks/2026-06-30-edm-tooling-naming-confusion.md`（private-only，凭证盘点方法论）
+- **本轮识别但暂不入库**（已覆盖 / 操作性）：
+  - Candidate #3 GEO（已在 `plain-language-translator-patterns.md` Round 5 扩展段）
+  - Candidate #4 #5 Loop Engineering / Skill 透明化（已在 `2026-06-27-plain-language-translator-cross-platform-package.md` + `2026-04-12-skills-sh-agent-skills-directory.md`）
+  - Candidate #12~#20 操作性心跳/存活检查（已在 `hermes-heartbeat-mechanism-finding.md` + `intco-modelhub-provider-setup.md`）
+  - Candidate #74~#91 半年度汇报内容（已在 `2026-05-28-half-year-report-content-method.md` + `feishu-wiki-pdf-export-no-pagebreaks.md`）
+  - Candidate #92~#93 CRM gateway tar.gz（内部 ops，private-only 不入公开仓库）
+  - Candidate #94~#99 蒸馏同事 / openhuman（已在 `tinyhumans-openhuman.md` + `colleague-skill-runtime-design.md`）
+- **新增判断**：
+  - 2026-05-12 07:06「利益目标 + 解释义务」→ 已在 Round 8 独立成卡 `formal-explain-once-stake-frame.md`，本轮补充 cross-link 完成双向引用，**不再单独成卡**
+
+## 第十轮建议方向
+
+- 跟进 2026-07-05 之后新消息（实时识别高价值线索）
+- 评估是否启动「Skill = 卖场」MVP（公司电商手套产品）
+- 飞书 CLI 多用户隔离现状盘点（lark-cli 是否已支持 scope 拆分）
+- 远程沙箱实测对比（E2B vs Daytona vs Modal vs Fly）
+- Hermes 默认模型轮换 Playbook 补全
+- 候选清单（99 项）剩余未覆盖部分已经全部识别为"已覆盖 / 操作性 / private-only"，建议下一轮重置工作台，按"消息窗口轮转"逻辑拉新一段历史
+
 ## 公开边界
 
 此清单来自群聊历史，只作为补录工作台公开；不包含完整群聊原文、内部系统细节、客户或真实业务数据。

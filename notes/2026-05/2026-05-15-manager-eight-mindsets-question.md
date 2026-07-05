@@ -94,7 +94,11 @@ public_level: sanitized
 - 每个问题补一份"劣答 → 优答"对照示例
 - 与 `experiments/2026-06/2026-06-01-plain-language-village-translator.md` 组合使用：先问 → 再翻译
 
-## 9. 公开边界
+## 9. 相关卡（交叉引用）
+
+- `notes/2026-05/2026-05-12-formal-explain-once-stake-frame.md` — 配套方法：8 维问题问完之后，如何"正式解释一次 + 立规则 + 按规则执行"，把问答升级为流程
+
+## 10. 公开边界
 
 - 不收录任何讲师原课件 / 原话术 / 案例。
 - 不公开内部组织结构、内部岗位、内部人员映射。

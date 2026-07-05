@@ -231,7 +231,13 @@ MVP 阶段可以先用：
 
 **不要等设计完美再上线**——共享 token 的风险每天都在放大。
 
-## 11. 公开边界
+## 11. 相关卡（交叉引用）
+
+- `playbooks/codex-device-code-auth-flow.md` — 同一套 OAuth Device Code 机制在 Codex CLI 场景的具体落地方案，本卡是多用户隔离的"机制设计"
+- `playbooks/feishu-topic-history-backfill.md` — 用 OAuth User Token + 多用户隔离原则做飞书话题群历史补录的具体 Playbook
+- `risks/historical-chat-backfill-boundary.md` — 多用户隔离原则在群历史补录场景的公开边界注意事项
+
+## 12. 公开边界
 
 - 不公开具体路径、具体用户名、具体 token 内容。
 - 不公开具体飞书 scope 列表、内部权限配置。

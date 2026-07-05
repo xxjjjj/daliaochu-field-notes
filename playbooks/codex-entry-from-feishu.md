@@ -58,6 +58,7 @@ tags: [codex, openclaw, hermes, cc-connect, feishu]
 - 群消息 `om_x100b6f7961a9b4a0b399c0b550514ba`（Codex 入口之争长讨论）
 - 群消息 `om_x100b6f7faec7fca4b29e64bd6c08c4b`（smoke 报错）
 - 群消息 `om_x100b6f79b138c8a0b345b5bfa2ecd22`（Codex 工具链不完整的吐槽）
+- `notes/2026-05/2026-05-13-remote-sandbox-vs-codex-sandbox.md` — Codex 沙箱的设计原则；本卡的"沙箱实测 A 路径串线风险"是该卡的延伸验证
 
 ## 7. 下一步
 

@@ -126,7 +126,12 @@ model:
 - 群消息 `om_x100b6d1c8ee3e0a4b1c2101ce771e14`（2026-06-05 16:42，首次 authentication failed）
 - 群消息 `om_x100b6d1c86cf3480b2600870aebbb44`（2026-06-05 16:44，authentication failed 复现）
 
-## 10. 下一步
+## 10. 相关卡（交叉引用）
+
+- `notes/2026-05/2026-05-05-feishu-cli-multi-user-isolation.md` — 同一套 OAuth Device Code 机制在多用户隔离场景的设计原理
+- `playbooks/codex-entry-from-feishu.md` — 认证之后如何从飞书侧驱动 Codex 的入口选择
+
+## 11. 下一步
 
 - 把 `hermes auth reset openai-codex` 命令封装成 Skill，便于在飞书群里一键调用。
 - 沉淀"refresh_token 即将过期"自动告警机制，避免突然失效影响线上对话。

@@ -230,7 +230,13 @@ MVP 阶段建议：
 **不要因为"远程沙箱更安全"的营销话术就盲目迁移**——
 风险转移 ≠ 风险消除，信任边界才是核心。
 
-## 11. 公开边界
+## 11. 相关卡（交叉引用）
+
+- `playbooks/codex-entry-from-feishu.md` — Codex 沙箱的设计原则来自 Codex CLI 的边界设定，本卡是从"为什么 Codex 必须沙箱"延伸到"Agent 沙箱边界设计"的判断
+- `notes/2026-05/2026-05-09-cc-connect-local-agent-to-messenger-bridge.md` — cc-connect 涉及的本地执行与本卡"本地沙箱优先"原则一致
+- `playbooks/intco-modelhub-provider-setup.md` — Provider 切换时如果涉及代码执行，需要配套的沙箱/隔离原则
+
+## 12. 公开边界
 
 - 不公开具体 Agent 内部配置、具体命令、具体路径。
 - 不公开具体云服务商账号、计费数据、内部架构。
