@@ -2,13 +2,13 @@
 title: 人民公园说AI：顶级闭源模型可得性下降与国产模型生态机会
 date: 2026-07-12
 discovery_source:
-  type: 群聊文字稿
+  type: 抖音短视频链接 + 群聊文字稿
   title: 《人民公园说AI》完整文字稿（口语化整理）
-  url: 
+  url: https://v.douyin.com/thrv-VlYnb4/
 primary_object:
-  type: media_transcript
+  type: douyin_video
   name: 人民公园说AI
-  url: 
+  url: https://www.iesdouyin.com/share/video/7659731520990481706/
 object_type: [trend_signal, case_or_media, methodology]
 source_type: [群聊线索]
 business_tags: [ITBP, 管理, 个人能力]
@@ -30,10 +30,10 @@ public_level: sanitized
 
 ## 2. 原始来源
 
-- 发现入口：打捞处群聊中转发的完整文字稿。
-- 资料本体：节目文字稿，未附原始视频链接。
+- 发现入口：打捞处群聊中转发的完整文字稿，后续补充抖音短链：https://v.douyin.com/thrv-VlYnb4/
+- 资料本体：抖音视频，短链已解析到 `iesdouyin.com/share/video/7659731520990481706/`。
 - 相关线索：Claude Code、Codex、GLM、Kimi、MiniMax、WorkBuddy、ZCode、飞书 CLI、Coinbase 内部编码模型使用案例等。
-- 当前状态：未追到原始视频/音频链接，节目中部分提法属于口语表达或二手观察，需继续追源验证。
+- 当前状态：已确认来源链接，但网页访问返回 Access Denied，暂未取得可校验的视频标题、作者主页、评论区补充材料或平台元数据。节目中部分提法仍属于口语表达或二手观察，需继续追源验证。
 
 ## 3. 核心观点 / 核心能力
 
@@ -105,7 +105,7 @@ public_level: sanitized
 这份资料最值得沉淀的不是某个模型推荐，而是一个判断框架：企业 AI 落地正在从“追最强模型”转向“构建可控、低摩擦、可替换的任务系统”。
 
 下一步应继续追源：
-- 查找《人民公园说AI》该期原视频/音频链接；
+- 使用抖音 App 或可访问环境打开短链，补齐视频标题、作者主页、发布时间、评论区补充材料；
 - 验证 Coinbase、模型路由、Fable/日志变量等关键事实；
 - 对 GLM/Kimi/MiniMax 接入 Claude Code/OpenCode/Codex 类生态做小实验；
 - 将“AI 编码助手安全沙盒”整理成可复用 playbook。
