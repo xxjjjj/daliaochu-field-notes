@@ -99,6 +99,8 @@ OpenAI 原文列出了富安用 AI 实现的 **8 个具体用例**（带原始 P
 
 仓库命名含 `100try85` 到 `100try95` 系列，说明至少做了 95 次实验尝试。note.com 杂志描述写的是"AI（Cursor/Claude）を相棒に"——主力工具是 Cursor + Claude，不是 Codex（OpenAI 文章强调 Codex 是因为那是他们的产品）。ai_housefarmnae 里有 `skills/` 目录和 CLAUDE.md，说明在用 Skill + Claude Code 体系做物理世界自动化。
 
+**身份交叉验证**：`ai_housefarmnae/project-nae-update-log.md` 中设备标识为 `tomiyasu16@raspberrypi.local`（X 账号），Instagram 帖子里出现了 `tomiyasu0428.github.io`，GitHub 资料显示 Hiroki Tomiyasu + Hokkaido。三重交叉确认是同一人。
+
 ## 5. 我学到了什么
 
 ### 对 BP 服务的业务启发
