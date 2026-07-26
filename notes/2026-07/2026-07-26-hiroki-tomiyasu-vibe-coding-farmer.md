@@ -33,6 +33,7 @@ OpenAI 官方 ChatGPT Pro 社区 2026年6月1日发布的正式人物案例。�
 - **发现入口**：抖音「柱子哥TzFilm」视频。视频中的“VibeCoding”框架是中国博主加的，OpenAI 原文未使用该词；但富安本人在 note.com 上确实使用了“Vibe Coding”标签。
 - **资料本体**：OpenAI ChatGPT Pro 社区文章《A broccoli farmer in northern Japan shares his chats》(2026-06-01)
 - **富安本人**：[X @tomiyasu16](https://x.com/tomiyasu16)｜[note.com/tomiyasu16](https://note.com/tomiyasu16)
+- **GitHub**：[github.com/tomiyasu0428](https://github.com/tomiyasu0428) — 103 个公开仓库，87 contributions/year，5 followers
 - **相关链接**：
   - OpenAI 原文：https://chatgptpro.substack.com/p/hiroki-tomiyasu
   - 富安 greenhouse demo 推文（702K views）：https://x.com/tomiyasu16/status/2038922364956914167
@@ -76,14 +77,27 @@ OpenAI 原文列出了富安用 AI 实现的 **8 个具体用例**（带原始 P
 | 层级 | 技术 |
 |------|------|
 | AI / 代码生成 | ChatGPT, Codex (OpenAI), Cursor, Claude |
-| IoT 硬件 | ESP32, BTS7960 电机驱动, 24V DC 电机 |
-| 后端 / API | Cloudflare Workers (边缘计算) |
-| 数据库 | Cloudflare D1, Airtable |
+| IoT 硬件 | ESP32, BTS7960 电机驱动, 24V DC 电机, 树莓派 |
+| 后端 / API | Cloudflare Workers (边缘计算), Cloudflare D1 |
+| 数据库 | Cloudflare D1, Airtable, MongoDB |
+| Agent 框架 | LangChain |
 | 消息通道 | LINE Bot / LINE Messaging API |
-| 前端 / 地图 | 自建地图 App（技术未具体说明） |
+| 前端 / 地图 | 自建地图 App, PWA (GitHub Pages), Android WebView |
 | 文档记录 | note.com（日文博客平台） |
+| 开发方法 | CLAUDE.md / Skills 目录（Claude Code 体系），AGENTS.md 风格 |
 
-没有查到 GitHub 仓库——富安主要用 note.com 记录过程，代码可能未公开或仅部分公开。
+**GitHub 仓库已确认公开，核心仓库：**
+
+| 仓库 | 描述 | Commits | 关键内容 |
+|------|------|---------|----------|
+| [agri-ai-agent](https://github.com/tomiyasu0428/agri-ai-agent) | 农场 AI Agent 主系统 | 25 | LangChain + MongoDB + LINE Bot，MIT License，CLAUDE.md，已迁移 427 条数据 |
+| [ai_housefarmnae](https://github.com/tomiyasu0428/ai_housefarmnae) | "Project Nae" 大棚 IoT | 4 | ESP32 ADC 扫描、土壤校准、树莓派、Cloudflare Workers，含 openclaw-raspberry-pi-setup.md |
+| [agri_line1](https://github.com/tomiyasu0428/agri_line1) | 拖拉机 GNSS 直线导航 PWA | 45 | "StraightBar Lite" v0.2.6，navigator.geolocation swath 偏移计算，Android WebView 封装 |
+| [Farm_AIagent3~7](https://github.com/tomiyasu0428/Farm_AIagent7) | 农场 Agent 多版本迭代 | 13 | TypeScript 栈，要件定义书 + 任务列表 |
+| satelite_agri / satelite_everyone | 卫星遥感 NDVI 监测 | — | 对应 OpenAI 文章中的卫星监测功能 |
+| 100try85~95 系列 | 实验日志 | — | MCP 日历、Google SDK、LINE 管理、智能财务等至少 95 次实验 |
+
+仓库命名含 `100try85` 到 `100try95` 系列，说明至少做了 95 次实验尝试。note.com 杂志描述写的是"AI（Cursor/Claude）を相棒に"——主力工具是 Cursor + Claude，不是 Codex（OpenAI 文章强调 Codex 是因为那是他们的产品）。ai_housefarmnae 里有 `skills/` 目录和 CLAUDE.md，说明在用 Skill + Claude Code 体系做物理世界自动化。
 
 ## 5. 我学到了什么
 
@@ -109,9 +123,9 @@ OpenAI 原文列出了富安用 AI 实现的 **8 个具体用例**（带原始 P
 | OpenAI 原文 | ✅ 可信，官方社区一手材料 |
 | 8 个用例 Prompt | ✅ 原文提供了完整 Prompt |
 | 技术栈细节 | ✅ ESP32/BTS7960/Cloudflare Workers 具体可查 |
+| GitHub 代码公开 | ✅ 103 仓库已确认，核心仓库有完整结构 |
 | 500万人民币营收 | ⚠️ 抖音博主的二手数字，OpenAI 原文未提；需打问号 |
-| 实际运行效果 | ⚠️ 有视频 Demo 但未见系统级验证报告 |
-| 代码公开 | ❌ 未找到 GitHub 仓库，主要以 note.com 文字记录 |
+| 实际运行效果 | ⚠️ 有视频 Demo，代码已公开可查，但未见系统级验证报告 |
 
 ## 7. 可做的小实验
 
