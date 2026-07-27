@@ -1,0 +1,14 @@
+# OSS cloned repos (local reference only, not tracked)
+/oss/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
