@@ -15,7 +15,7 @@ business_tags: [ITBP, 个人能力, 运营, 产品]
 problem_tags: [知识沉淀, 流程提效, 成本控制]
 method_tags: [知识库, 资源索引, 开源社区]
 tool_tags: [FMHY]
-value_stage: 学习理解
+value_stage: 已沉淀
 risk_tags: [版权, 数据安全, 合规, 国内可用性]
 public_level: sanitized
 ---
@@ -24,9 +24,26 @@ public_level: sanitized
 
 ## 1. 这是什么
 
-FMHY（FreeMediaHeckYeah）是一个社区维护的免费资源导航站，主站为 https://fmhy.net，GitHub 组织为 https://github.com/fmhy，核心仓库为 https://github.com/fmhy/FMHY。
+FMHY（FreeMediaHeckYeah）是一个社区维护的免费资源导航站，主站为 https://fmhy.net，GitHub 组织为 https://github.com/fmhy，核心仓库为 https://github.com/fmhy/FMHY。2026 年 7 月更新确认：主站全球排名约 521（Semrush），月访问量约 6894 万，活跃度显著。
 
 它不是单一软件，而是一套长期维护的资源索引：覆盖 AI、教育、开发者工具、影音、阅读、移动端、Linux/macOS、隐私与广告拦截等分类。公开资料显示，FMHY 通过 GitHub / Discord / 社区贡献持续更新，并提供安全、可疑、失效等标记体系。
+
+### SafeGuard 浏览器扩展（已追源）
+
+官方安全扩展 FMHY SafeGuard（https://github.com/fmhy/FMHY-SafeGuard）已验证存在且持续维护，功能与许晶晶提到的"配合 SafeGuard 使用"一致：
+
+- 基于 FMHY Filterlist 实时检测网站安全等级：Starred / Safe / Unknown / Potentially Unsafe / Unsafe
+- 支持 Firefox / Chrome / GitHub Releases 三种安装渠道
+- 支持 7 种语言（英、西、俄、德、葡、法、日），暂无中文
+- v1.3.6 起支持 FMHY 备用镜像（fmhy.vercel.app、fmhy.pages.dev）的识别
+- 可自定义主题、警告页开关、过滤更新频率
+- 开源（GitHub），免费
+
+另外还有第三方变体 FMHY-SafeLink-Guard（https://github.com/Maxikozie/FMHY-SafeLink-Guard），以油猴脚本方式在网页内直接高亮标记安全/不安全链接，功能更轻量。
+
+### 多语言访问
+
+主站原生英文，页面底部有 Appearance 设置可切换暗色模式等。中文访问依赖浏览器自带翻译功能（Chrome/Edge 右键翻译网页）。SafeGuard 扩展本身支持 7 语言但不含中文。
 
 ## 2. 原始来源
 
@@ -37,6 +54,7 @@ FMHY（FreeMediaHeckYeah）是一个社区维护的免费资源导航站，主�
   - AI 分类：https://fmhy.net/ai
   - 教育资源：https://fmhy.net/educational
   - 开发者工具：https://fmhy.net/developer-tools
+  - 官方备份镜像页：https://fmhy.net/other/backups
 
 ## 3. 核心观点 / 核心能力
 
@@ -94,7 +112,8 @@ FMHY 的核心价值不是“白嫖资源”，而是把分散在互联网上的
 ## 9. 风险和边界
 
 - **版权边界**：FMHY 中包含影音、下载、torrent、piracy 等高风险分类，企业内部不能直接扩散或鼓励使用。
-- **安全边界**：免费站点、镜像、脚本、下载源可能带来恶意软件、广告追踪、账号泄露风险。
+- **安全边界**：免费站点、镜像、脚本、下载源可能带来恶意软件、广告追踪、账号泄露风险。SafeGuard 扩展可降低误入风险站点的概率，但不能替代人工判断。
+- **镜像安全**：官方维护的镜像页（https://fmhy.net/other/backups）列出已验证镜像实例；非官方镜像可能注入广告或恶意脚本，不建议使用未经验证的第三方镜像。
 - **数据边界**：AI 工具类尤其不能上传客户数据、内部文档、业务截图、账号信息。
 - **采购边界**：免费替代只用于前置筛选，不等于可以绕过正版授权、合规采购或安全审查。
 - **公开边界**：本笔记只沉淀方法和公开入口，不搬运群聊原文，也不推荐具体版权敏感资源。
