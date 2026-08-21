@@ -145,3 +145,44 @@ python3.12 /Users/crystalxu/.agents/skills/last30days/scripts/last30days.py \
 ## 10. 公开边界
 
 本实验只使用公开 GitHub 数据和本地已安装的 Skill 文件，不包含群聊原文、内部客户、真实业务数据或账号登录信息。本地 corpus 内容被 last30days 标记为 `LOCAL ONLY`，不会进入外部发布。
+
+## 11. 数据源配置清单（2026-08-21）
+
+`--diagnose` 显示当前声明可用源为：`reddit`、`hackernews`、`polymarket`、`github`、`grounding`。但从两轮实跑结果看，当前稳定产出证据的主要是 GitHub 和本地 corpus。
+
+### 当前已生效
+
+| 数据源 | 状态 | 说明 |
+|---|---|---|
+| GitHub | 可用 | 通过本机 `gh` 认证；项目模式可返回 stars、issues、README 摘要。 |
+| 本地 corpus | 可用 | 通过 `--corpus` 传入本地目录；文件被标记为 `LOCAL ONLY`。 |
+| Reddit | 已启用但不稳定 | 首轮报 Python 缺少 `expat`，第二轮 HTTP 429；需要修 Python XML 依赖并接受限流。 |
+| Hacker News | 已启用但首轮无有效结果 | 搜到 1 条后被前缀过滤；不是未配置，而是关键词/过滤策略未命中。 |
+| Polymarket | 已启用但主题不匹配 | 对工具类主题通常无结果；适合事件、预测、政治、体育、宏观主题。 |
+| grounding / Web | 已启用但效果弱 | 没有 Brave/Exa/Serper/Parallel 等 Web API Key，keyless 模式首轮无结果。 |
+
+### 尚未配置或未安装
+
+| 数据源 | 需要什么 | 价值/风险 |
+|---|---|---|
+| X/Twitter | `AUTH_TOKEN`+`CT0`、`XAI_API_KEY`、`XQUIK_API_KEY`，或浏览器 Cookie | 实时热点价值高；Cookie/账号方式有风控和隐私风险，API Key 更可控。 |
+| YouTube | 安装 `yt-dlp`；可选 `SCRAPECREATORS_API_KEY` 作为转录备用 | 适合长视频/播客/教程深挖；免费但依赖网络和字幕可用性。 |
+| TikTok | `SCRAPECREATORS_API_KEY` + `INCLUDE_SOURCES=tiktok` | 内容趋势价值高；付费/第三方服务，需要评估数据合规。 |
+| Instagram | `SCRAPECREATORS_API_KEY` + `INCLUDE_SOURCES=instagram` | 视觉/红人信号；同样依赖第三方服务。 |
+| Threads | `SCRAPECREATORS_API_KEY` + `INCLUDE_SOURCES=threads` | 补充文本社交讨论。 |
+| Pinterest | `SCRAPECREATORS_API_KEY` + `INCLUDE_SOURCES=pinterest` | 视觉趋势和选品参考。 |
+| LinkedIn | `SCRAPECREATORS_API_KEY` + `INCLUDE_SOURCES=linkedin` | B2B/招聘/人物信号强；敏感，需谨慎使用。 |
+| Bluesky | `BSKY_HANDLE` + `BSKY_APP_PASSWORD` | 免费、低风险的替代社交源。 |
+| TruthSocial | `TRUTHSOCIAL_TOKEN` | 美国政治/社媒信号；国内业务价值低。 |
+| Digg | `digg-pp-cli` | 免费 keyless，主要是 AI 高信号账号聚合。 |
+| arXiv | `arxiv-pp-cli` | 免费，适合技术/论文主题。 |
+| Techmeme | `techmeme-pp-cli` | 免费，适合科技媒体/公司动态。 |
+| Trustpilot | `trustpilot-pp-cli` + opt-in | 适合品牌/产品口碑，不适合普通趋势研究。 |
+| Perplexity | `PERPLEXITY_API_KEY` + `INCLUDE_SOURCES=perplexity` | Web 摘要和 Deep Research 质量高；付费。 |
+| Web 搜索后端 | `BRAVE_API_KEY`/`EXA_API_KEY`/`SERPER_API_KEY`/`PARALLEL_API_KEY` | Brave 成本较低；能显著提升普通 Web 覆盖。 |
+
+### 配置优先级建议
+
+1. **先修免费/低风险源**：Python `expat`、`yt-dlp`、Brave API Key、Digg/arXiv/Techmeme CLI。
+2. **再补可控付费源**：ScrapeCreators 只开 TikTok/Instagram 等确需平台；Perplexity 仅在需要深度 Web research 时开启。
+3. **最后评估高风险源**：X/Twitter 浏览器 Cookie、LinkedIn、自动读取浏览器登录态；这类能力涉及账号风控和隐私，默认不开。
