@@ -140,3 +140,96 @@ public_level: sanitized
 ## 10. 公开边界
 
 本实验只记录公开仓库和公开资料的结构化判断，不包含群聊原文、内部客户、真实业务数据或账号登录信息。后续如涉及真实账号、Cookie、内部资料或客户场景，应改为 `private-only` 或先做脱敏版本。
+
+## 11. 安装验证记录（2026-08-21）
+
+### 实际执行
+
+1. 检查本机 Node/npm：
+
+```bash
+node -v && npm -v && npx --yes skills --help
+```
+
+结果：Node `v25.8.1`，npm `11.11.0`，`skills` CLI 可用。
+
+2. 通过 Agent Skills CLI 全局安装：
+
+```bash
+npx --yes skills add mvanhorn/last30days-skill -g -a codex -y
+```
+
+结果：安装完成，目标路径为：
+
+```text
+~/.agents/skills/last30days
+```
+
+安装列表显示 `last30days` 已在全局技能中，来源为 `mvanhorn/last30days-skill`，关联 Agent 包含 Codex。
+
+3. 第一次预检失败：
+
+```bash
+python3 /Users/crystalxu/.agents/skills/last30days/scripts/last30days.py --preflight
+```
+
+失败原因：系统默认 `python3` 是 3.9.6，而 last30days v3 要求 Python 3.12+。
+
+4. 安装 Python 3.12：
+
+```bash
+brew install python@3.12
+```
+
+结果：安装成功，解释器路径为：
+
+```text
+/opt/homebrew/bin/python3.12
+```
+
+5. 使用 Python 3.12 重新预检：
+
+```bash
+python3.12 /Users/crystalxu/.agents/skills/last30days/scripts/last30days.py --preflight
+```
+
+结果：
+
+```text
+last30days preflight
+Status: Ready to research with safe defaults.
+
+Local reads:
+- Config source: env_only
+- Project config: not active
+- Browser cookies: off; no browser stores will be read
+
+Local writes:
+- none planned
+
+Credentials:
+- Present: GitHub token or gh auth
+
+Optional commands unavailable: arxiv-pp-cli, brightdata, digg-pp-cli, techmeme-pp-cli, trustpilot-pp-cli, yt-dlp
+
+Network:
+- Available sources: reddit, hackernews, polymarket, github, grounding
+
+Next: run research normally, or configure optional sources if you need more coverage.
+```
+
+### 安装判断
+
+- `last30days` 已可在当前机器上以安全默认模式运行。
+- 默认不读取浏览器 Cookie，当前可用源为 Reddit、Hacker News、Polymarket、GitHub、grounding。
+- X/Twitter、YouTube 转录、TikTok、Instagram、Digg、arXiv、Techmeme 等增强源尚未配置，属于可选能力。
+- 安装器提示该 Skill 有较高安全风险（Gen High Risk、Socket 1 alert、Snyk High Risk）。原因与其拥有完整 Agent 权限、可读取浏览器 Cookie、可联网抓取和写本地文件有关。后续运行应保持默认关闭 Cookie，不把客户或内部敏感关键词直接送入外部源。
+
+### 下一步
+
+建议先用一个不敏感关键词跑一次安全默认模式测试，验证：
+
+1. 是否能在当前网络环境下返回 Reddit/HN/GitHub 等源；
+2. 输出格式是否能直接转成“趋势雷达”笔记；
+3. 是否需要把输出保存目录改到打捞处仓库的 `experiments/` 或临时目录；
+4. 是否有必要安装 `yt-dlp` 等可选命令。
