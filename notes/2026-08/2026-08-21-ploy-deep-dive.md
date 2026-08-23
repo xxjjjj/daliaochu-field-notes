@@ -15,7 +15,8 @@ business_tags: [市场, 销售, 运营, 产品]
 problem_tags: [获客, 转化, 用户洞察, 流程提效]
 method_tags: [Agent, GEO, ABM, 自动化, AEO]
 tool_tags: [Ploy, HubSpot, Attio, Webflow, Figma, GA4]
-value_stage: 可小实验
+value_stage: 观望（雷达跟踪，不实验）
+review_note: 2026-08-23 晶晶判断：太新，营销成分重，不做实验，保持观望
 risk_tags: [国内可用性, 成本, 幻觉, 代码所有权, 数据安全]
 public_level: public
 ---
@@ -159,7 +160,7 @@ HubSpot 自己已经有的相关能力：
 Ploy 是"agent 吃掉一整个职能栈"在营销建站赛道里目前完成度最高的样本之一。它真正的创新不在页面生成（这层已经 commodity），而在 **Slurper 降低迁移门槛 + PloyBooks 编码营销 SOP + 访客数据与 CRM 闭环 + agent 主动持续优化** 这四个设计组合起来形成的系统。
 
 对 INTCO：
-- 作为市场 BP 雷达标杆持续跟踪
-- 可以花 $50 在 sandbox 里验证，不要直接进生产
-- 国内可用性和数据合规是硬约束，主要价值在海外独立站/产品线站点
+- 作为市场 BP 雷达标杆持续跟踪，**暂不安排实验**（产品太新、营销成分重，2026-08-23 晶晶定调观望）
+- 国内可用性和数据合规是硬约束，即便未来要验证，价值也主要在海外独立站/产品线站点
 - 它的"reverse proxy 共存"和"PloyBooks 可由用户编写"两个设计模式，可以反向输入到我们自己做企业内部 AI 系统的设计里
+- 观望触发点：出现真实客户案例（非 YC/投资方背书）、定价稳定、第三方独立评测能复现其效果宣称
