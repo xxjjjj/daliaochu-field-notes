@@ -15,7 +15,7 @@ business_tags: [ITBP, 产品, 个人能力]
 problem_tags: [知识沉淀, 流程提效]
 method_tags: [Agent, MCP, 自动化, 知识库, RAG]
 tool_tags: [AnySearch, MCP, Skill, API, 搜索]
-value_stage: 待验证
+value_stage: 暂不建议
 risk_tags: [数据安全, 成本, 合规, 幻觉]
 public_level: public
 ---
@@ -68,11 +68,47 @@ AnySearch 是一款面向 AI Agent（而非人类用户）的搜索基础设施�
 - 隐私承诺（零遥测、零保留）写在官网和 SECURITY.md 里。
 
 **需要验证的部分：**
-- **基准测试为自测**：Frames/FreshQA/WebWalkerQA 上优于 Parallel/Brave 的数据来自官方，未见第三方独立复现。p50/p95 延迟也是 Maker 口头口径。
-- **"10 万开发者"存疑**：知乎报道称上线一个月 10 万开发者，但 PH 只有 1 条用户评论（4.0 分）、1.9k followers，GitHub 1.8k stars——开发者注册数和实际活跃数可能差距较大，营销口径偏乐观。
+- **基准测试为自测**：Frames/FreshQA/WebWalkerQA 上优于 Parallel/Brave 的数据来自官方，未见第三方独立复现。p50/p95 延迟也是 Maker 口头口径。Towards AI 2026年8月发布的"7款AI搜索工具横评"（Exa/Tavily/MCP360/Brave/SerpAPI/Firecrawl等）甚至没有把 AnySearch 列入。
+- **"10 万开发者/400万调用/4000 stars"存疑**：知乎/CSDN 报道称上线一个月 10 万开发者、累计 400 万次调用，但 PH 只有 1 条用户评论（4.0 分）、1.9k followers；GitHub mcp-server 1.8k stars、anysearch-skill 5.8k stars（两个仓库数字不一致，且 skill 仓库早期仅 63 stars，短期暴涨疑似刷量或营销集中投放）；issue 区仅 2 个 open issue 且 issue 创建被限制（"Issue creation is restricted"），社区活跃度与宣传量级严重不匹配。
 - **垂直数据源具体清单未完全公开**：声称覆盖金融/法律/学术等 23 域，但具体接入了哪些数据库、是否有合规授权、中文数据源覆盖深度如何，文档里没有完整披露。
 - **团队背景信息有限**：4 位 AI 开发者的具体身份、融资情况、公司主体未见公开资料，长期维护和商业化可持续性待观察。
-- **免费额度可持续性**：1000 次/天免费很慷慨，但企业版定价、SLA、数据处理协议（DPA）均未公开。
+- **免费额度可持续性**：1000 次/天免费很慷慨，但 Search Pro 和 Enterprise 均无公开价格（需联系销售），SLA、数据处理协议（DPA）均未公开。
+- **中文搜索存在已知 bug**：GitHub issue #7（2026-08-11，kumaxs 报告）显示 MCP server 的 `search` 工具 inputSchema 漏声明 `zone`/`language` 参数，导致通过 MCP（含 Hermes）发起中文查询时路由到国际数据源，结果相关性差（实测"小米汽车2026年7月交付量" top-3 返回理想/蔚来的无关内容）。直接调 REST API 传 `zone:"cn"` 则正常。截至 2026-08-23 该 issue 仍 open。
+- **Node.js SDK 兼容性 bug**：issue #8（2026-08-14）报告 Streamable HTTP transport 下 Node.js 官方 TypeScript SDK 的 `tools/list` 永不返回，根因是 CloudFront SSE 连接复用问题，影响 DeepSeek Harness 等客户端，仍 open。
+
+### 5.1 真实社区反馈（近30天，2026-07-23 至 08-23）
+
+**Product Hunt**：仅 1 条文字评论（评分 4.0/5，来自 @omri_ben_shoham1，77条历史评论的老用户）。正面："信息密度排序确实有效——近重复段落更少，每个 query 的独立事实更多，设置快，API 直接。" 负面："排序是黑盒，希望有 debug 模式显示每条结果的相关性/冗余/熵分数。" PH 评论区其余均为 Maker 自己回复技术提问（结构化输出 schema、爬虫反爬、来源溯源等），以及用户祝贺，缺乏深度使用反馈。
+
+**GitHub Issues**：仅 2 个 open issue，均为 8 月新报告的功能性 bug（中文 MCP 路由 #7、Node.js SDK 兼容 #8），无付费用户的 feature request 或投诉。Issue 创建被仓库限制，说明外部贡献通道不开放。
+
+**Reddit**：搜索 `site:reddit.com AnySearch 2026` 返回 0 条相关讨论。在 r/LocalLLaMA、r/ClaudeAI、r/crewAI、r/SideProject 等常见 AI Agent 社区均未发现自发讨论。
+
+**中文社区**：CSDN、知乎、博客园、OSChina、36氪的内容高度同质化，均为产品通稿/软文口径（"10万开发者""400万调用""76.4%准确率""133ms延迟"），无独立用户实测或负面反馈。CSDN 有一篇个人博客标题写"实测"但内容仍为正面介绍。Threads 上台湾用户 @dsif2017 发了一条 23 赞/7 评论的帖子（3.2k 阅读），语气中立偏观望："号称很强……有意思的地方是它会先透过官方中转和routing，帮你拿到更适合给AI用的内容"，未给出深度结论。
+
+**第三方横评**：Towards AI（Medium 大号，100K+ 订阅）2026年8月发布 "I Tested 7 AI Search Tools for Agent Use"，评测了 Exa、Tavily、MCP360、Brave、SerpAPI、Firecrawl 等，**AnySearch 未入选**。这在一定程度上说明它在英文主流 AI 工程社区的渗透率仍然很低。
+
+**小结**：AnySearch 的"热度"目前主要由产品方主动投放的中文通稿和 Product Hunt launch 驱动，真实独立用户反馈极其稀薄（PH 1条评、GitHub 2个bug、Reddit 零讨论），且已暴露中文 MCP 路由和 Node.js 兼容性两个实际问题。宣传数据与可验证的社区参与度之间存在明显落差。
+
+### 5.2 付费与免费差异
+
+| 维度 | Free（$0/月） | Search Pro（Professional） | Enterprise |
+|---|---|---|---|
+| 价格 | 免费 | **未公开**（需联系销售） | **未公开**（需联系销售） |
+| 结构化输出 | ✅ | ✅ | ✅ |
+| 日请求量 | 1,000次/天 | "更多 API 请求" | 自定义限额 |
+| QPS | 20 QPS/key | "更高请求限额" | 企业级速率 |
+| 搜索质量 | 标准 | "更高质量搜索结果" | 高级垂直搜索 |
+| 垂直深度 | 23域基础访问 | "更深垂直搜索" | 高级垂直搜索能力 |
+| 安全合规 | 匿名/零保留 | 同左 | 企业级安全/隐私/合规、私有能力隔离 |
+| 支持 | 社区支持 | 未明确 | 专属客户经理、优先技术支持 |
+| 匿名访问 | 可用，更低速限额 | — | — |
+
+关键观察：
+- 免费版功能不阉割（结构化输出、垂直域、意图路由都开放），主要限制在量和质量深度。
+- Pro 和 Enterprise 的具体价格、请求配额、垂直深度差异**均未公开**，是典型的"Contact Sales"销售驱动模式，通常意味着月费在数百到数千美元量级，面向团队/企业客户。
+- 免费 API key 注册后 rate_limit 字段显示 100（GitHub 文档示例），与官网标称的 1000次/天+20QPS 口径不完全一致，实际限额可能按接口/域细分。
+- **付费用户数量无任何公开数据**。结合 PH 仅1条评论、GitHub 仅2个外部 issue、Reddit 零讨论、第三方横评未入选，产品上线仅3个多月，Pro/Enterprise 大概率处于极早期客户验证阶段，付费用户数很可能是两位数甚至个位数。"10万开发者"即使属实，也应几乎全为免费/匿名用户。
 
 ## 6. 对个人能力有什么价值
 
@@ -106,8 +142,12 @@ AnySearch 是一款面向 AI Agent（而非人类用户）的搜索基础设施�
 
 ## 10. 当前结论
 
-AnySearch 是 Agent 搜索基础设施赛道里一个完成度较高、值得跟踪的中国团队产品。它的核心洞察（Agent 需要的是结构化信息而非链接列表）和设计（意图路由 + 并行检索 + Entity-Enriched Markdown）方向正确，开源 MCP server 降低了接入门槛和审计顾虑。
+AnySearch 提出的 Agent-native 搜索方向（结构化交付、意图路由、多源并行、垂直域聚合）是正确的赛道，产品也真实可用、有开源 MCP server。但深入追源社区反馈后，发现三个实质性问题：
 
-当前判断：**雷达观察，值得做小实验验证，但暂不建议作为企业级搜索层依赖。** 先用真实研究任务做 A/B 对比，如果在中文垂直场景和结果质量上确实优于现有方案，再考虑在非敏感场景试点。同时把它的输出格式设计作为我们自己 Agent 工具优化的参考。
+1. **社区声量与宣传严重不符**：号称"10万开发者、400万调用"，但 Product Hunt 仅 1 条用户评论、GitHub 仅 2 个外部 issue 且 issue 创建被关闭、Reddit 零讨论、英文主流 AI 工程社区（Towards AI 横评等）未将其列入。热度主要由中文通稿和 PH launch 集中投放驱动，真实独立用户反馈极其稀薄。
+2. **中文 MCP 接入存在未修复 bug**（issue #7，8月11日报告至今 open）：通过 MCP（含 Hermes）发中文查询时 `zone`/`language` 参数漏声明，导致路由到国际数据源，中文结果相关性差。这对中文用户是直接的功能缺陷。
+3. **商业化处于极早期，付费用户数无公开数据**：Pro/Enterprise 价格不公开，无任何可验证的付费客户信号；"10万开发者"即使属实也几乎全是免费/匿名用户。产品上线仅3个多月，免费额度和商业模式的可持续性存疑。
+
+当前判断：**从"待验证"下调为"暂不建议引入"——作为雷达观察对象保留，但其 Agent-native 搜索的设计思路（Entity-Enriched Markdown、意图路由、subset selection 替代 ranking）仍值得我们在自有工具设计中借鉴。** 不建议投入时间做 A/B 实验或 MCP 接入，除非：①中文 MCP bug 修复；②出现独立的第三方深度评测或真实付费案例；③团队背景和商业化路径更透明。
 
 标签：B 主线（市场部 BP 雷达——AI 工具/基础设施广度扫描），非待试点项目，不挂靠具体业务线。
