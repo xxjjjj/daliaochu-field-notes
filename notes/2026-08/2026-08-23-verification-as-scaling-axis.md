@@ -3,7 +3,11 @@ title: "验证即扩展轴：便宜模型 + 自验证/多模型编排逼近前�
 date: 2026-08-23
 source_type: video-summary
 source_url: ""
-source_hint: "群内转发的视频摘要，原始视频链接未提供；核心线索可追溯至 Jacky Kwok 2026-08-17 推文及 LLM-as-a-Verifier 论文"
+source_hint: "群内转发的视频摘要，原始视频链接未提供；论文本体已定位"
+paper_url: "https://arxiv.org/abs/2607.05391"
+paper_html: "https://arxiv.org/html/2607.05391v1"
+project_site: "https://llm-as-a-verifier.com"
+code_repo: "https://github.com/llm-as-a-verifier/llm-as-a-verifier"
 tags: [llm, verification, test-time-scaling, mixture-of-agents, orchestration, cost-optimization, agentic]
 value_stage: 已追源
 public_level: public
