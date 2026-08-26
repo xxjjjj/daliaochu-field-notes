@@ -66,7 +66,7 @@ TiDB 联合创始人 & CTO  Ed Huang 的 testimonial：高峰期每天烧 12 亿
 
 1. **Token 成本**：多个 Agent 同时在线、共享上下文，token 消耗会指数级增长。TiDB CTO 说日烧 12 亿 token——这个成本不是所有团队能承受的。
 2. **管理噪音**：Agent 多了以后，"管理 Agent"本身可能变成新的负担。
-3. **竞争格局**：Slack、飞书、钉钉都在往 IM 里加 Agent；Claude Code、Cursor 也在往"Agent 团队管理"方向长。Raft 需要证明独立平台的价值大于插件。
+3. **竞争格局**：Claude Code、Cursor 等 coding agent 自己在往"多 Agent 管理"方向长，这是 Raft 最直接的竞争压力。但传统 IM（Slack/飞书/钉钉）加 AI 助手跟 Raft 不是同一个赛道——IM 里的 AI 助手是辅助人聊天/查信息，Raft 是编排多个 Agent 协同干活，产品本质不同。
 4. **刚改名 Raft、发 1.0**：产品仍在早期，企业级功能（SSO、私有化）还没上线。
 5. **数据隐私**：虽然 Agent 跑在用户机器上，但协作元数据（消息、任务状态）是否经过 Raft 服务器，需要确认。
 
