@@ -15,7 +15,7 @@ business_tags: [ITBP, 运营, 市场]
 problem_tags: [知识沉淀, 流程提效, 用户洞察]
 method_tags: [Agent, 知识库, RAG, 多模态, 向量检索]
 tool_tags: [阿里云OSS, Qwen3-VL-Embedding, 百炼, MCP]
-value_stage: 待验证
+value_stage: 可小实验
 risk_tags: [成本, 数据安全, 合规]
 public_level: public
 ---
@@ -38,6 +38,8 @@ public_level: public
   - OSS 数据索引多模态检索教程：https://help.aliyun.com/zh/oss/user-guide/tutorial-oss-data-indexing-used-in-multimodal-retrieval
   - Qwen3-VL-Embedding GitHub：https://github.com/QwenLM/Qwen3-VL-Embedding
   - HF 模型卡：https://huggingface.co/Qwen/Qwen3-VL-Embedding-8B
+  - OSS Vectors 官方计费页：https://help.aliyun.com/zh/oss/vector-billing-item
+  - OSS Vectors 快速入门：https://help.aliyun.com/zh/oss/user-guide/vector-bucket-quickstart
 - 相关链接：向量 Bucket 最佳实践（掘金）https://juejin.cn/post/7623310070420701220
 
 ## 3. 核心观点 / 核心能力
@@ -57,7 +59,8 @@ public_level: public
 ## 5. 它是否可信，哪些需要验证
 
 - ✅ 已核验：OSS Vectors 产品形态、配额、4096 维上限、余弦距离、元数据过滤；Qwen3-VL-Embedding-8B 的存在、维度、许可证、榜单成绩。
-- ⚠️ 未核验（转述数字，查定价页前勿引用）："1GB 向量存储 0.35 元/月""每月 20GB 免费写入""扫描 1TB 0.012 元"。
+- ✅ 定价已核验（官方计费页 help.aliyun.com/zh/oss/vector-billing-item）：向量存储 **0.35 元/GB/月**；向量检索扫描 **0.012 元/TB**（每次检索按索引表总大小计扫描量）；向量写入 **0.50 元/GB，每 UID/地域每月 20GB 免费额度**——视频转述的三个数字全部准确。注意"20GB 免费"指**写入量**免费，不是存储免费；另有 OSS 标准 API 请求次数费。OSS Vectors 于 **2026-06-10 正式商业化收费**（此前免费试用阶段）。性能参考：1000 万行×1024 维、TopK=100 时典型 QPS 约 100，规模增大或 TopK 增大时下降。
+- ✅ 支持地域：深圳/北京/杭州/上海/青岛/乌兰察布/新加坡/香港/雅加达/法兰克福/硅谷/弗吉尼亚。
 - ⚠️ 待追源：**"视频记忆插件"本体**——名称、仓库、是否开源、支持哪些客户端未明；视频中"百炼 qwen2.5-vl-embedding 模型"的名称疑似口误（百炼多模态向量模型现售名是 multimodal-embedding 系列，开源旗舰是 Qwen3-VL-Embedding）。
 - ⚠️ 转述称"原始视频保留在原平台仅存向量索引，避免数据泄露"——对公有云方案要分清：用 OSS 向量 Bucket 时原始文件本就在 OSS 普通 Bucket；若数据在第三方平台只上传向量，才成立。企业场景不能把这句话当数据安全结论。
 - 待验证：本地 8B 模型的 GPU 成本与百炼 API 成本的盈亏平衡点；10 秒切片+相邻向量距离做镜头切分的实际准确率；字幕索引与视频帧索引混合召回的权重策略。
