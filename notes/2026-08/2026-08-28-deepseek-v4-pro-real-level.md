@@ -106,7 +106,26 @@ public_level: public
 
 即：Sol 留指挥+升级兜底；V4 Pro 从"不用"变为"执行位的重型首试"，V4-Flash 继续承担轻量批量。若未来想给指挥位找更强替身，评估对象应是 Claude Fable（规划/审查品味第一档），V4 Pro 不在这个赛道。
 
-## 9. 风险和边界
+## 9. 指挥位平替调研（2026-08-28 追加，问题：谁能接 GPT-5.6 Sol 的指挥位）
+
+> 指挥位硬要求：长程 agent 可靠性（不丢线、能恢复）、规划/架构品味（计划错了下游全返工）、多模态审查（看截图/UI 产物）、行为可预期。成本权重低（低频高杠杆）。另注意社区共识：**指挥/审查模型应与执行模型不同厂**（独立审查者原则，StackSpend/MindStudio 等）。
+
+**结论：严格同档平替不存在；按可达性分三档。**
+
+**Plan 内（火山 Agent Plan 已验证可用，零新增采购）：**
+- **Kimi K3（首选试指挥）**：Moonshot 7/16 发布，2.8T/50B 激活，1M 上下文，原生视觉（图+视频），always-on 思考。AA 智能指数 57（总榜 #4，开源系最高；对比 V4 Pro 44、GLM-5.2 51）、Terminal-Bench 2.0 88.3（厂商）/2.1 独立 80.9、FrontierSWE 81.2，BenchLM agentic 89.5。卖点就是"数小时长 agent loop + 视觉理解"，与指挥位要求重合度最高。$3/$15 价位，Plan 抵扣。短板：输出慢（38 tps）、thinking 常开不可关。
+- **GLM-5.2（便宜次选）/ GLM-5.3（关注）**：GLM-5.2 SWE-bench Pro 62.1、Terminal-Bench 2.1 独立复测 81.0（与 K3 持平），$1.4/$4.4 约 K3 四分之一价、153 tps 快 4 倍、MIT 权重可自托管；纯文本无视觉，规划品味弱于 K3。GLM-5.3（8 月新，同底模后训练专攻环境 RL）Terminal Bench 3.0 28.3% vs K3 17.4%、长程任务完成率 34.5% 超 Opus 4.8 的 29.5% 且省 58% token——但 Plan 是否已上架待实测确认。
+- doubao-seed-evolving（Plan 原生旗舰，1M+视觉）：无公开对标数据，可作为盲评对照组。
+
+**Plan 外（能力同档，但需另购/订阅，有数据出境与可用性问题）：**
+- **Claude Opus 5**（$5/$25）：7/24 起 Claude Code 默认，Terminal-Bench 2.1 89.1%、SWE-bench Verified ~97%，社区口径"生产 agent 默认推荐"，性价比旗舰；Fable 5（$10/$50）规划/安全审查品味第一档但贵，适合升级兜底。
+- **GPT-5.6 Terra**（$2/$12）：Sol 的官方同系降级档，Terminal-Bench 2.1 87.4、SWE-bench Pro 63.4，agentic 能力与 Sol 差距小、价格一半多——如果只是想省钱，同系降档比换厂风险最小。
+
+**不建议**：V4 Pro（前述错位）、MiniMax M3（多模态通才但 agentic 长程非强项）。
+
+**建议验证方式（符合"跑真实数据再判断"）**：拿 harness bridge 的一个真实任务，让 Sol / kimi-k3 / glm-5.2 / doubao-seed-evolving 各写一份计划文档+验收标准，Crystal 盲评计划质量；再让 kimi-k3 实际指挥一轮 Flash 执行，观察长程稳定性。一次实验即可定路由。
+
+## 10. 风险和边界
 
 - 幻觉率 94%：无校验不得用于事实性产出。
 - Harness v0.1 明确"开发者预览、将有破坏性变更"，禁止上生产关键路径；danger-full-access 模式只在可丢弃容器用。
