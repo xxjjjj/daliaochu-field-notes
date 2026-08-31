@@ -139,3 +139,15 @@ Crystal 的判断：未来人的注意力是最大瓶颈，agent 小军团（含
 3. **判断注意力不可省，只能信任分层**。执行注意力可转移给 agent；口径、人事、对客户承诺的判断必须留人。对应机制：低风险 agent 自决（如周五成长周报自动固化低风险纠正），高风险只递结论+证据。
 4. **对飞书总线的设计原则**：每个 agent 发出的消息必须自带类型标签——[FYI 知会] 攒成战报 / [DECISION 待拍板] / [BLOCKED 卡住]；人刷群只看后两类。这层"军团门口的秘书"是 Cumora 不替我们做、必须自建的部分，比"接多少 agent 进来"更决定实际效率。
 5. 猜想的验证方式：拿一条真实跨 agent 流程实测（Codex 计划+验收 → Claude Code 执行 → Hermes 验证+飞书话题群回报，[TO:XXX] 路由），量端到端墙钟时间和人中途伸手次数，与现状对比，跑两周即见分晓。
+
+## 13. A2A 现状与"EDI 第三形态"判断（2026-08-30 群内讨论）
+
+**A2A 进展事实（2026-08 核查）**：协议由 Google 2025-04 发布，已捐 Linux 基金会；一周年时 150+ 组织支持，GitHub 22k stars，官方 SDK 覆盖 Python/JS/Java/Go/.NET；Salesforce Agentforce、ServiceNow Now Assist 有生产部署；机制为 Agent Card（/.well-known/agent.json 能力自描述）+ HTTP/JSON-RPC + SSE 流式任务。DeepLearning.AI 有免费实操课。但 Hermes/Codex/Claude Code/OpenClaw 目前均不原生说 A2A，接入需自写薄包装。结论：标准生产级可用，但"自己军团内部"用飞书/Markdown 总线更省，A2A 的真实价值在跨组织边界，生态仍薄，定位盯标准而非现在接入。
+
+**Crystal 的关键类比（已确认成立）：A2A 就是企业边界自动化的第三形态，同构于 EDI。**
+
+- 对应关系：EDI 报文（850/810）↔ A2A Task/Message；partner profile ↔ Agent Card；VAN/B2B 交易网络 ↔ agent 发现注册层（未成熟）；企业内部 ERP 接口 ↔ MCP；X12/EDIFACT 标准 ↔ A2A/AP2 协议。
+- 历史教训可直接迁移预判：(1) 标准免费但 onboarding 映射/测试/认证成本催生整个集成行业；(2) 普及靠大客户倒逼而非技术驱动（沃尔玛逼供应商上 EDI → 未来大采购商逼供应商"agent 可对接"，对英科是渠道压力不是选择题）；(3) 长尾永远在标准外（大客走 agent 直连，小客仍邮件/网页，GEO 与人类入口分层共存）。
+- 本质升级：EDI 交换"单据"（结果凭证），A2A 交换"任务"（协商+委托+过程反馈+结算）；配合 2026 上半年 Visa Intelligent Commerce / Mastercard Agent Pay / Stripe Agentic Commerce 生产级 agent 支付轨道，企业间自动化边界从"交换数据"推进到"交换决策"。
+- 形态演化：EDI（标准化单据）→ API/互联网 EDI（第二形态）→ A2A + agentic commerce（第三形态）。
+- 同期雷达（见讨论，待展开）：AI computer-use（Anthropic CUA/OpenAI CUA/browser-use）正在融合 RPA——RPA 当护栏管高量重复、agent 当判断层处理变化，直接影响软件实施一组来也/影刀运维的换代路径。
