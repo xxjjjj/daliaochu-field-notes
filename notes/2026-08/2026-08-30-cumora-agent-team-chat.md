@@ -150,4 +150,5 @@ Crystal 的判断：未来人的注意力是最大瓶颈，agent 小军团（含
 - 历史教训可直接迁移预判：(1) 标准免费但 onboarding 映射/测试/认证成本催生整个集成行业；(2) 普及靠大客户倒逼而非技术驱动（沃尔玛逼供应商上 EDI → 未来大采购商逼供应商"agent 可对接"，对英科是渠道压力不是选择题）；(3) 长尾永远在标准外（大客走 agent 直连，小客仍邮件/网页，GEO 与人类入口分层共存）。
 - 本质升级：EDI 交换"单据"（结果凭证），A2A 交换"任务"（协商+委托+过程反馈+结算）；配合 2026 上半年 Visa Intelligent Commerce / Mastercard Agent Pay / Stripe Agentic Commerce 生产级 agent 支付轨道，企业间自动化边界从"交换数据"推进到"交换决策"。
 - 形态演化：EDI（标准化单据）→ API/互联网 EDI（第二形态）→ A2A + agentic commerce（第三形态）。
-- 同期雷达（见讨论，待展开）：AI computer-use（Anthropic CUA/OpenAI CUA/browser-use）正在融合 RPA——RPA 当护栏管高量重复、agent 当判断层处理变化，直接影响软件实施一组来也/影刀运维的换代路径。
+- 同期雷达（见讨论，待展开）：AI computer-use（Anthropic CUA/OpenAI CUA/browser-use）与 RPA 同属"接口缺失补丁层"。
+- **RPA 口径已修正（Crystal 2026-08-30 明确纠正）**：RPA 不是要守护/融合的资产，是"没有正经接口时不得不采用"的补丁，耗能、脆弱、原理性不稳定，长期目标是消灭，不是共存（厂商"RPA+AI 融合"叙事是利益相关立场）。正确技术分层：①有接口走 API/EDI/iPaaS/MCP；②NC 等系统有数据通路的推接口/中间表，不在 UI 上点；③确定性逻辑用规则代码；④模型贴判断点与异常口；⑤RPA/AI computer-use 是接口缺失时最后一层补丁，随系统换代退场。来也/影刀台账应视为技术债清单，逐条评估退场路径。她另确认原则："确定性的东西按确定性方式做，不是所有事都要用模型——模型贵且耗算力"。
