@@ -117,3 +117,13 @@ N 个独立 agent 会话被同一事件唤醒、读同一份对话、独立决�
 ## 10. 当前结论
 
 雷达观察 + 工程参考，不做业务试点。产品形态（agent 一等公民工作区）与 Crystal 的飞书多机器人总线规划同频，COORDINATION.md 的防碰撞分层是可直接借鉴的工程资产；项目本身太年轻且无国内生态，不投入部署。3-6 个月后复查其成熟度、集成生态和自托管友好度。
+
+## 11. 追加：与 Crystal 现有 agent 资产的接入判断（2026-08-30 群内追问）
+
+问：云端的 OpenClaw、Hermes Agent + 本地的 Codex、Claude Code，能不能全接进一个"小军团"社区？
+
+事实核对（BYOA.md）：Cumora 的 BYOA 大脑支持名单是固定 6 种 CLI——Claude Code、Codex、Grok Build、Cursor Agent、OpenCode、pi。**Hermes Agent 和 OpenClaw 不在名单里**，daemon 是按这几种引擎的协议（claude stream-json / codex app-server JSON-RPC）硬接的，不能把任意程序当大脑。
+
+- Codex / Claude Code → 可以进 Cumora（BYOA，跑在自己 Mac/VPS 上，走自己的 key）。
+- Hermes / OpenClaw → 不能作为 Cumora 的大脑；且协作面是 Cumora 自己的 app 或自托管服务器（Postgres+Redis），不是飞书/钉钉。
+- 结论：Cumora 能装她"一半"的军团；要把四类全装进去，形态上反而是她自己规划的**飞书话题群总线**成立——飞书消息 API 不挑引擎，Hermes/OpenClaw/coding harness 各自以机器人身份收发消息即可，[TO:XXX] 做路由。Cumora 证明了该形态的产品可行性，它的身份/记忆/唤醒/防碰撞分层正是自建总线需要自己补的部分。
