@@ -85,7 +85,50 @@ public_level: public
 关键认知：**"记住正常、异常报警"= 无监督/半监督异常检测**，
 它就是这套需求的正确名字，用成熟方案做，不必等果蝇。
 
-## 6. 风险与边界
+## 7.5 GitHub 开源本体盘点（2026-09-12 实查 star/提交时间）
+
+整条技术链分四层，每层都有活的开源本体：
+
+**① 数据与连接组浏览（科研基础设施）**
+- `murthylab/codex`（92★，2026-09-08 仍在更新，Apache-2.0）：FlyWire 连接组 Web 浏览器，
+  可遍历神经元连接、看网络图。Flask 应用，`make_data.sh` 拉数据，本地 localhost:5000。
+- `seung-lab/FlyConnectome`（26★，教程仓库）：CAVEclient/navis/fafbseg 程序化查询连接组的入门 notebook。
+- `flyconnectome/flywire_annotations`（54★，2026-07 更新）：Nature 论文配套的系统级细胞类型标注。
+- 数据本体在 FlyWire Codex + Zenodo（公开但体积大：连接表 parquet 约 97MB）。
+
+**② 果蝇脑脉冲模型（Eon 刷屏新闻的开源部分）**
+- `eonsystemspbc/fly-brain`（547★，2026-08-29 提交，GPL-2.0）：这就是 Eon 演示背后的全脑 LIF 模型。
+  基于 FlyWire v783 数据（约 13.8 万神经元，README 写约 500 万突触的可计算子图），
+  支持 Brian2 / Brian2CUDA / PyTorch / NEST GPU / GeNN 五个后端跑同一个脑，
+  能激活/静默任意神经元观察脉冲传播，含与论文 Brian2 CPU 真值的对比脚本。
+  注意：**它开源的是"脑"（脉冲仿真），接 MuJoCo 身体的完整闭环集成没有开源**；
+  需要 NVIDIA GPU（RTX 4070 级别）+ Linux，重科研基准，不是拿来即用的产品。
+
+**③ 身体与具身仿真（"果蝇数字孪生"）**
+- `NeLy-EPFL/flygym`（258★，2026-08-24 更新，Apache-2.0）：EPFL 的 NeuroMechFly v2，
+  最值得玩的本体——Python 库，果蝇能看（复眼视网膜仿真）、闻、在复杂地形走、与环境交互，
+  分层控制（脑做感觉整合决策、腹神经索做运动控制），MuJoCo 驱动。
+- `TuragaLab/flybody`（658★，Apache-2.0）：MuJoCo 果蝇身体模型 + 运动 RL 任务，
+  Eon 的 `eonsystemspbc/flybody` 就是 fork 它。
+- `NeLy-EPFL/NeuroMechFly`（60★，v1，已停止更新，被 flygym 取代）。
+
+**④ 社区玩物（验证"普通人也能摸到本体"）**
+- `DenisSergeevitch/desktop-fly`（845★，2026-09-05 更新，MIT 代码+CC BY-NC 数据）：
+  macOS 桌面宠物果蝇，23,210 个真实神经元位置渲染脑窗，668 神经元 FlyWire 回路
+  （含逃跑命令神经元 Giant Fiber、视觉 looming 神经元 LC4/LPLC2）跑 1kHz LIF 仿真，
+  接 1,045 神经元 MaleCNS 真实运动回路驱动六条腿。Swift 写的，macOS 13 直接编译。
+  README 极其诚实地列了"哪些是实测接线、哪些是建模参数"——是判断这类项目成熟度的范本。
+
+**关键判断**
+- 开源的全是**科研仿真器**：目的是理解脑和具身智能，没有任何一个仓库含工业传感、
+  异常检测、火灾预警功能。笔记里"提取视觉/听觉子回路做工厂监测"在开源世界里没有对应物——
+  flygym 的视觉仿真的是果蝇复眼看到什么，不是工业异常检测器。
+- 想"亲手体感"：桌面玩用 desktop-fly（Mac 直接 build）；想认真学连接组+具身闭环用 flygym；
+  想看全脑脉冲怎么跑用 eonsystemspbc/fly-brain（要 GPU）。
+- License 注意：fly-brain 是 GPL-2.0，FlyWire 衍生数据多为 CC BY-NC（非商用），
+  任何往商业产品搬的路径都要先过数据授权。
+
+## 8. 风险与边界
 
 - 火灾预警是安全攸关场景：任何 AI 告警只能做**前置预警叠加层**，
   不能替代消防认证的烟感/温感，更不能用未验证仿生黑盒做唯一告警源。
