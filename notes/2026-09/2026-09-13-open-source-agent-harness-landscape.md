@@ -32,8 +32,8 @@ public_level: public
 
 | 系统 | 许可 | 强项 | 七层短板 |
 |---|---|---|---|
-| Coze Studio 开源版（字节，2025 开源） | Apache 2.0 | 完成度最高的全家桶：编排/插件网关/知识库/评测/可观测，可完全私有化 | 沙箱强隔离、声明式硬护栏偏弱 |
-| Dify（130k+ stars） | Apache 2.0+少量品牌限制 | 自托管最成熟，workflow+RAG+监控一体，100+ 模型接入 | 企业自评短板即"治理层、规模化管控"（第4/7层） |
+| Coze Studio 开源版（字节，2025-07 才开源，coze-dev/coze-studio，21.6k star/392 commits） | Apache 2.0 | 出身大厂；docker compose 一键私有化（2核4G）；可视化 agent/workflow 搭建器完整；底层 Eino 引擎 | 官方 feature list 无 guardrail/trace/eval/人审（第4/6/7层空）；README 自曝代码节点 Python 执行环境、SSRF、水平越权等公网安全风险（第5层弱）；开源仅月余，成熟度远低于 Dify |
+| Dify（130k+ stars，运行两年+） | Apache 2.0+少量品牌限制 | 自托管最成熟，workflow+RAG+监控一体，100+ 模型接入 | 企业自评短板即"治理层、规模化管控"（第4/7层）；硬护栏同样需外挂 |
 | Bisheng 毕昇 | Apache 2.0 | 国内团队，企业级定位，私有化/中文友好 | 生态规模小于 Dify |
 | n8n | fair-code（非真开源） | 400+ 集成的自动化引擎 | 本质是 workflow，不是 agent harness |
 | FastGPT / RAGFlow / Flowise | 开源 | 知识库/RAG、可视化 | 通用 agent 管控更弱 |
@@ -72,8 +72,9 @@ cron/会话持久化（第1层）、运行日志（第6层部分）。明显缺�
 - 第 4 层：护栏主要靠系统提示+确认，缺独立于模型的声明式策略引擎
   （NeMo 范式）；
 - 第 3 层：记忆/上下文裁剪是工程化重点而非产品化组件。
-对照学习路径：先看 Coze Studio 开源版（完整产品形态）→ 再看
-Temporal + Langfuse + NeMo 三件套补编排/可观测/硬护栏认知。
+对照学习路径：先看 Dify（跑两年的完整产品形态；Coze Studio 可视化更漂亮但
+2025-07 才开源、管控层更薄）→ 再看 Temporal + Langfuse + NeMo 三件套补
+编排/可观测/硬护栏认知。
 
 ## 6. 待验证
 
