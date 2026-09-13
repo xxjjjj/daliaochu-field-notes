@@ -93,6 +93,15 @@ public_level: public
 
 **对原视频结论的修正：** 视频的三层底座方向在 2026 年不但没过时，第一层还被 OKF 标准化、第二层被"检索专员小模型"工程化了；但视频隐含的"通用大模型自己调度一切"正在被"大模型指挥专用小模型做检索"取代，这是它没赶上的最重要变化。
 
+### 5b-补：检索专科模型在 RAG 场景的实际能力盘点（2026-09-13）
+
+- **SWE-grep（Cognition 2025-10）只精代码**：训练环境全是代码仓库工具（grep/glob/read），未开放独立 API，仅嵌在 Windsurf Fast Context / Devin 内；不能平移到企业文档 RAG。
+- **Context-1（Chroma 2026-03，20B，基座 gpt-oss-20b，权重开放）**：公开基准是 BrowseComp-Plus / SealQA / FRAMES / HLE（网页与通用多跳检索），非代码；号称追平 GPT-5/Opus 4.5、4 路并行比大模型单次便宜。但 agent harness 与进化代码发布滞后，社区反馈裸权重复现不了官方数字，"harness 占一半功力"；其训练基准含 Chroma 自产 benchmark，需独立复测；中文企业文档语料未验证。
+- **路线有效性的独立旁证**：WebExplorer（8B，SFT+RL，16+ 轮网页搜索，BrowseComp 赢过更大模型）。
+- **企业 RAG 当下真正规模化部署的"检索专科"是 reranker 精排模型**（Cohere Rerank 4、BGE Reranker v2；Databricks 报 +15pp 检索准确率），形态=混合召回+小模型精排；"小模型自主多轮翻文档"尚在早期，脏 PDF/表格/同义词/权限过滤都没被自动解决。
+- 社区口碑：SWE-grep 正面但无法外部独立评测；Context-1 的 HN 讨论偏冷且有自评基准质疑。选型原则：看自家语料 A/B，不信厂商自报。
+- 对自有知识云：中文文档场景暂不具备直接上 Context-1 条件；低成本可试点的是检索链路加 reranker，agentic 检索专员等中文/文档向开源版本与独立复测。
+
 ## 6. 它是否可信，哪些需要验证
 
 可信的部分（方向性共识，非本文首创）：
