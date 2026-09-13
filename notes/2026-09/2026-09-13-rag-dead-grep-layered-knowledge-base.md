@@ -87,7 +87,7 @@ public_level: public
 争论起点是 2025-02，但到 2026 年中局面已经往前走了三步，视频文字稿没覆盖：
 
 1. **"RAG 已死"作为口号基本熄火，收敛为"检索方式按任务分工"。** RAGFlow 2025 年终综述、多位从业者的说法一致：喊了两年"RAG 已死"，检索仍是生产 AI 系统的核心积木，变的是组织知识和检索的方式。SWE-bench 上朴素 chunk-RAG baseline 1.96%，2026 年 agentic 系统霸榜 80%+——被淘汰的是"无脑切块 top-k"这一种实现，不是检索本身。
-2. **检索专用小模型成了新赛道（与"贵模型指挥便宜模型"同构）。** Windsurf 2026 年初 Wave 13 发布 SWE-grep / SWE-grep-mini：专用小模型每轮并行 8 个检索调用，比通用 agent 乱翻快约 10 倍；Chroma 2026-03 发布 Context-1（20B 检索专用模型），同任务推理快约 10 倍、成本约 1/25。趋势：大模型不再亲自 grep 烧钱，而是派一个便宜的"检索专员"。来源：buzzgrewal 综述（二手，具体数字待官方材料复核）。
+2. **检索专用小模型成了新赛道（与"贵模型指挥便宜模型"同构，但关键在"专门训练"而非"随便拿便宜模型凑数"）。** Cognition（Devin/Windsurf）2025-10 发布 SWE-grep / SWE-grep-mini（一手：cognition.com/blog/swe-grep；Devin 官方文档）：用强化学习专门训练"多轮检索动作"的小模型，工具集收窄为 grep/read/glob，一轮并行多路搜索，只返回文件与行号范围，不负责答题；主模型（Sonnet 4.5）配它后任务完成数不变、端到端时间显著下降，且主模型上下文不被污染；mini 在 Cerebras 上 2800+ tok/s。Chroma 2026-03 发布 Context-1（20B），定位为 self-editing 检索 agent，号称检索基准追平 GPT-5/Opus 4.5、快约 10 倍、成本约 1/25（厂商自报，待独立复测）。本质是"图书情报专科资料员"：不是通用便宜模型兼职，而是 RL 训出的单一职能专科模型；同趋势还有 JSON 抽取专科模型 Schematron（8B/3B，比 GPT-5 便宜 40-80 倍）。对自有 harness 的含义：从"按通用能力分层"再进一步到"按职能专科化"。
 3. **Google 2026-06 发布 OKF（Open Knowledge Format）**：把视频说的第一层"核心规则走 Markdown 文件拓扑"直接标准化——一个 vendor-neutral 开放规范，知识打包成带 YAML frontmatter 的 markdown 目录（bundle），git 可 diff、人可编辑、任何 agent 可直接遍历消费，无 SDK、无锁定。Google 官方称其形式化的就是 "LLM-wiki pattern"（一手：cloud.google.com 博客 + GitHub GoogleCloudPlatform/open-knowledge-format，v0.1）。**这与我们 Skill/llm-wiki 的目录+frontmatter+索引形态几乎同构，等于被 Google 追认为行业格式**；后续可评估我们的知识包是否对齐 OKF 字段。
 4. **GraphRAG 经历一轮祛魅再定位。** 2024 年被捧的全量 GraphRAG 因索引成本和"很多真实任务还不如朴素 RAG"在 2026 年降温；LazyGraphRAG 把索引成本压到全量 GraphRAG 的 0.1%。共识定位：多跳关系推理、需要可解释链路的强监管场景（金融/法务/医疗）用图，单事实查找用向量/关键词，生产上以 query routing 做混合。网传"86% vs 32%"等对比数字多出自咨询/厂商博客，不作为实证引用。
 
