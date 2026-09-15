@@ -15,8 +15,8 @@ business_tags: [ITBP, 个人能力]
 problem_tags: [流程提效, 成本]
 method_tags: [Agent, Vibe Coding, MCP]
 tool_tags: [ChatGPT, Codex, MCP, cloudflared, OAuth]
-value_stage: 待验证
-risk_tags: [数据安全, 国内可用性, 合规]
+value_stage: 暂不建议
+risk_tags: [数据安全, 国内可用性, 合规, 账号风控]
 public_level: public
 ---
 
@@ -80,8 +80,35 @@ prompt 自觉）；单 workspace 边界 + realpath 规范化防符号链接/`../
 - 非官方项目，依赖 ChatGPT 网页端 connector + Computer Use 能力，OpenAI 改版可能随时打断。
 - Cloudflare tunnel 把本地工作区暴露成公网 MCP 端点，即便有 OAuth，也是真实攻击面；
   企业代码仓库场景需安全评审，不能在含客户数据/内部系统的仓库上直接试。
-- 商业可持续性未知：个人项目，4.2k star 但仅 51 commits。
-- star 数截图时点为 2026-09-16，热度真实性未交叉验证。
+- 商业可持续性未知：个人项目。GitHub API 实测（2026-09-16）：创建于 2026-08-28，
+  仅 19 天，4092 star / 432 fork / 6 subscribers，但 issues 只有 9 条且多数是
+  "插眼"围观帖，issue 创建已被仓库限制，discussions 关闭——star 数与深度使用反馈
+  严重不匹配，属于流量爆发型新项目，尚未经时间检验。
+- 套餐门槛存疑：issue #2 有人质疑"Plus 账号已无法 MCP 本地，只有 Business 才行"，
+  作者关闭了该 issue 但公开页面未见结论，账号套餐支持情况需实测确认。
+
+## 5b. 社区反馈（2026-09-16 检索）
+
+**需求侧真实存在**：V2EX（t/1240315，近 7 天 2975 浏览）和 r/codex 都有同题热帖——
+"网页版额度用不完、Codex API 额度捉襟见肘"，这是订阅制下的普遍套利需求。
+Reddit 用户的手工流程（ChatGPT 当架构师出 prompt → Codex 实现 → 回贴给 ChatGPT review）
+与本项目自动化的流程完全一致，验证了模式本身。
+
+**同类项目已扎堆**（说明是一波小浪潮，也说明门槛不高、同质化快）：
+miuuyy/codex-chatgpt-web、yyjeqhc/webcodex、Waishnav/devspace、
+agentify-sh/desktop、abhij1306/codeweave，以及自建本地 MCP+cloudflare tunnel 的教程。
+
+**一手封号/风控证据（最重要）**：V2EX 用户 bobomaster 在同类工具帖下反馈
+"慎用，用了一天我的号已经提示风控，直接路由到 gpt-5.5-mini"；
+另有用户提醒"别把号弄没了，特别是土区传家宝宝"。
+机制上这是用自动化方式把订阅额度"嫁接"给 Codex，属 ToS 灰色地带，
+OpenAI 已有降级路由的风控动作。这一点与所有社交平台自动化同风险级别：
+主号/工作号不要试。
+
+**官方正在收编该模式**：Reddit 反馈显示 ChatGPT Work 模式已能在对话内调用
+Codex skill、派 subagent，配合官方 GitHub connector 可完成 plan→执行→review
+闭环；另有 Codex 内 @ChatGPT 对话的引用能力。即"大脑+手"的整合官方已在做，
+第三方 tunnel 方案很可能是过渡期产物，生命周期存疑。
 
 ## 6. 对个人能力有什么价值
 
