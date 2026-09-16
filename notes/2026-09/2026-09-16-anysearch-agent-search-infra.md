@@ -62,6 +62,13 @@ AnySearch 不是给人用的搜索引擎，而是给 AI Agent 调用的"统一�
 
 一句话区分：**Google 给的是"网页地址清单"，Tavily 给的是"开放网页上洗干净的内容和答案"，AnySearch 想多给一层"Tavily 没有的垂直专业数据库"。** 前两层 Tavily 与 AnySearch 是同类，AnySearch 的全部差异化赌注都在垂直源的覆盖和质量上——而这一点恰恰还没被独立验证，也是实测时唯一值得看的东西。
 
+### 与 J-Herm 现状（web_search + web_extract）的对比（2026-09-16 核实配置）
+
+- 本机 `~/.hermes-v019/config.yaml`：`web_search.backend: tavily`，`.env` 配了 `TAVILY_API_KEY`——**我们现在的 web_search 就是 Tavily 官方接口**。
+- `web_extract` 走内部抓取后由 ark-plan/doubao-seed-evolving 做正文清洗，长文落盘可分页读；AnySearch 的 extract 是固定 5 万字符截断的 markdown，清洗环节无模型。
+- 结论：接 AnySearch 后，"搜索 + 抓正文"两件事与现状**几乎完全重叠，没有增量**，网页层它不可能比 Tavily 本体更优；唯一多出的能力是 `search(domain=...)` 的垂直结构化数据源和 `batch_search`（我们靠一次发多个并行工具调用实现，差别不大）。
+- 所以对本组：除非实测发现某个垂直源（如国内工商/A股/学术）质量明显好，否则没有接的必要——它是"Tavily + 垂直源聚合"，而 Tavily 那半我们已经有了。
+
 ## 下一步（待晶晶决定，未执行）
 
 1. 花 10 分钟实测：匿名调 `get_sub_domains` 拉全部 23 个垂直域清单，看国内源覆盖；用 2–3 个我们真实的调研问题（如某外贸客户背调、某医疗器械法规检索）对比现有 web_search 结果质量。
