@@ -22,19 +22,39 @@ public_level: public
 
 # 50+ 大厂设计系统索引（可直接取用）
 
+## 0. 本体核对（2026-09-26 截图追源更新）
+
+原视频（博主：锁毅博）指的本体是 GitHub 仓库 **VoltAgent/awesome-design-md**
+（https://github.com/VoltAgent/awesome-design-md ），不是泛泛的"大厂设计系统导航"。
+
+- 仓库本体：把热门网站的设计系统逆向提取成 **DESIGN.md 纯文本文件**，每个系统一份，
+  丢进项目根目录，AI 编码 agent（Claude Code / Codex / Cursor 等）读取后直接生成风格一致的 UI。
+- DESIGN.md 格式由 **Google Stitch** 提出；每份含设计 token（颜色/字体/间距/圆角）、
+  组件样式、布局与响应式规则，并配 preview.html / preview-dark.html 预览。
+- 截至 2026-09-26 实测：**117,916★ / 13,209 forks，MIT**；2026-03-31 创建，是今年增长最快的仓库之一
+  （10 天 3.5 万★）。目录下已有 **74 个**站点/品牌：Vercel、Stripe、Linear、Notion、Apple、
+  Claude、Cursor、Figma、Tesla、Ferrari、Starbucks、Nike、NVIDIA、Spotify、Binance、Coinbase、
+  xAI、MiniMax 等，开发者工具/SaaS/消费品牌/车厂都有。
+- 每份 DESIGN.md 结构（以 Linear 为例，实测全文约 23.5k 字符）：YAML frontmatter 里是完整 token 树
+  （colors / typography / rounded / spacing / components），正文是布局原则、响应式断点、迭代指南和
+  "已知缺口"（如 Linear 浅色系未公开、字体为专有需开源替代）——颗粒度足以直接约束 AI 出图。
+- 真正价值定位：**解决"AI 生成的前端能用但视觉像五个 prompt 拼出来"的问题**，是 Vibe Coding 的
+  设计约束层；不需要 Figma 导出或 JSON schema。
+
 ## 1. 这是什么
 
-小红书一条视频笔记整理的「大厂设计系统」合集，卖点是"复制就能用"——做界面/原型/前端时，
-不用从零设计，直接套用各厂公开的设计规范、Figma 资源和组件库代码。
+小红书一条视频笔记推荐上述仓库，卖点是"复制就能用"——做界面/原型/前端时，
+把对应风格的 DESIGN.md 复制进项目，让 AI 编码工具直接产出匹配该设计系统的界面。
 
-原笔记因小红书 IP 风控（error 300012）无法直接读取，本卡沿"设计系统"主题追到一手来源，
-实测了 52 个系统的官网可访问性与开源仓库 star/许可证（2026-09-26 实测，数据为当日快照）。
+原笔记网页端因小红书 IP 风控（error 300012）无法直接读取；已通过群内截图追到本体并实测。
+下方第 3 节起的清单是沿"设计系统"主题扩展的一手来源补充（52 个系统官网 + 许可证实测）。
 
 ## 2. 原始来源
 
-- 发现入口：小红书笔记（视频），笔记 ID `6ab257a100000000350198e0`，网页端被 IP 风控拦截
-- 资料本体：各设计系统官网与官方 GitHub（下方清单）
-- 参考二手索引：知乎《各大厂设计系统/官方资源汇总》https://zhuanlan.zhihu.com/p/558318039
+- 发现入口：小红书视频笔记（博主：锁毅博，310 赞 / 939 收藏），笔记 ID `6ab257a100000000350198e0`
+- 资料本体：https://github.com/VoltAgent/awesome-design-md （MIT，117.9k★，74 个 DESIGN.md，实测 2026-09-26）
+- 相关链接：格式提出方 Google Stitch；分析 https://ossinsight.io/blog/design-md-protocol-2026；
+  知乎《各大厂设计系统/官方资源汇总》https://zhuanlan.zhihu.com/p/558318039
 
 ## 3. 核心观点 / 核心能力
 
@@ -150,5 +170,9 @@ public_level: public
 
 ## 10. 当前结论
 
-主题成立且实用。对本组最直接的落点：内部工具前端统一到 Ant Design（中后台）/ Vant（移动 H5），
-AI 编码实验优先试 shadcn/ui；政府系规范作为复杂表单与无障碍的参考。原小红书视频内容待截图核对。
+本体已核实：**VoltAgent/awesome-design-md 是 Vibe Coding 的"设计约束层"**——把 74 个热门产品的
+设计系统做成 AI 能直接读的 DESIGN.md，解决 AI 生成前端风格随机、拼接感重的问题，MIT 可商用，
+117.9k★ 且仍在更新。下一步值得做的小实验：挑 1-2 份（如 Linear、Stripe）放进真实项目，
+让 Claude Code/Codex 按 DESIGN.md 出页面，对比无约束时的一致性；后续可考虑为英科内部工具
+写一份自己的 DESIGN.md（企业蓝/字体/间距 token 化），作为所有 AI 前端产出的默认约束。
+下方 52 个传统设计系统清单作为补充索引保留。
