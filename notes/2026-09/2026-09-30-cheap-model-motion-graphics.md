@@ -1,88 +1,90 @@
 ---
-title: 普通大模型 + Codex 跑出 Opus 5.5 级动态图形视频
+title: 普通大模型 + Agent Skill 跑出 Opus 5.5 级动态图形视频（RuiC-motion-reel）
 date: 2026-09-30
 discovery_source:
   type: 小红书短视频截图
   title: 索亚加德「普通大模型也能跑出opus5.5的那种视频效果」
   url: ""
 primary_object:
-  type: trend_signal
-  name: 代码生成式动态图形（Remotion + Coding Agent）平价化
-  url: https://www.remotion.dev/docs/ai/coding-agents
-object_type: [trend_signal, methodology, case_or_media]
-source_type: [小红书, 官网, YouTube]
+  type: open_source_project
+  name: HRuiCcc/RuiC-motion-reel
+  url: https://github.com/HRuiCcc/RuiC-motion-reel
+object_type: [open_source_project, trend_signal, methodology, case_or_media]
+source_type: [小红书, GitHub, 官网]
 business_tags: [市场, 运营, 产品, 个人能力]
 problem_tags: [获客, 流程提效, 内容生产]
 method_tags: [Agent, Vibe Coding, Prompt, 自动化]
-tool_tags: [Codex, Remotion, ClaudeCode]
-value_stage: 待验证
+tool_tags: [AgentSkill, Python, ffmpeg, DeepSeek]
+value_stage: 可小实验
 risk_tags: [版权, 幻觉, 成本]
 public_level: public
 ---
 
-# 普通大模型 + Codex 跑出 Opus 5.5 级 Motion Design 视频
+# RuiC-motion-reel：普通模型零美术素材代码出片
 
 ## 1. 这是什么
 
-小红书博主「索亚加德」的短视频：画面是深色科技风动态图形（Motion Graphics）作品集片段，超大字体动效、色差故障、时间码/监视器装饰元素，文案称「普通大模型也能跑出 opus5.5 的那种视频效果」，标签带 `#howto入门codex`、`#vibecoding`、`#榨干设备howto`。即：不买最贵的 Claude Opus 5.5，用普通模型 + Codex 类 coding agent 做代码生成式视频，也能得到接近的成片质量。
+小红书博主「索亚加德」短视频指向的 GitHub 开源项目 **HRuiCcc/RuiC-motion-reel**（Public，代码 MIT）。它是一个给编码 Agent 用的 Skill：一句「用代码做一条 15 秒动态图形片」，Agent 即从零生成 1920×1080/30fps（450 帧）成片，画面和配乐全部代码产出，不用 After Effects、不引用任何外部美术素材（字体随包，OFL 1.1）。
 
-截图只有开头一帧，折叠文案和视频正片里的具体做法（用什么库、什么提示流程）未取得。
+关键事实：**作者自称整条链路（建模、排版、分色、配乐、出片）是用 DeepSeek Flash 跑通的**，不绑定模型，任何能读写文件、执行命令的编码 Agent（Claude Code / ZCode / Codex 类）都能用。这就是「普通大模型跑出 Opus 5.5 效果」的实际本体——不是 Remotion，而是自研 Python 渲染引擎。
 
 ## 2. 原始来源
 
-- 发现入口：小红书短视频截图（2026-09-30 群内分享），作者「索亚加德」，文案折叠未能取全
-- 资料本体：待追原视频链接/博主主页
-- 相关链接（交叉验证该技术路线真实存在）：
-  - Remotion 官方文档《Prompting videos with coding agents》：https://www.remotion.dev/docs/ai/coding-agents （官方明确支持 claude / codex / kimi / opencode）
-  - YouTube《I Used GPT-5.5 & Codex to Build Motion Graphics with Remotion》（2026-04，Code Bear）
-  - Towards AI：Codex + Remotion 的模板化工作流（src/templates、video-spec、lint + 渲染校验）
-  - Charlie Hills Substack：Opus 5.5 最大跃迁之一就是 motion graphics，可作为「对标效果」参照
+- 发现入口：小红书博主「索亚加德」两条短视频截图（2026-09-30 群内分享），第二条视频字幕「就是这个开源项目」并展示 GitHub 仓库页
+- 资料本体：https://github.com/HRuiCcc/RuiC-motion-reel
+- 依赖：python3（numpy + Pillow）、ffmpeg
 
 ## 3. 核心观点 / 核心能力
 
-- 视频不是扩散模型「生成」出来的，而是代码渲染：React/TS 写时间轴、插值、转场，确定性、可逐帧改、可复用模板。代表工具是 Remotion（MIT 开源核心，$25/seat 起，可自渲染或云渲染）。
-- 博主主张：这条路线的产出质量上限主要由模板/工作流和提示方式决定，模型档位可以下沉——贵模型 Opus 5.5 只是一次成功率更高，普通模型靠「模板 + 规范约束 + lint/渲染回环」也能逼近。
-- 社区已沉淀配套玩法：Codex/Claude Code 的 Remotion skill、模板分层（Root 注册 / templates 实现 / spec 数据分离）、每次改动必须过 lint 和至少一次渲染或静帧校验。
+- 自研渲染引擎（engine/）：
+  - core.py：画布、矢量/文字通道、2× 超采样、bloom/色差/颗粒、印刷原语（叠印 multiply、网点、纸纹、套印偏移）
+  - three.py：真 3D——不用三角形光栅化，把曲面密采样成点云、投影后按深度排序散射（numpy 重复下标最后写入 = 画家算法），遮挡精确且自带颗粒感
+  - dsp.py：代码合成配乐（FFT 时变滤波、磁带抖晃、混响、频谱分析）
+- 15 张「风格牌」抽签换视觉语言：暗色科技 HUD、riso 丝网印刷、纸艺、银盐暗房、恒星普朗克配色、氰版蓝图、紫外光刻等，每种都有已渲染成片（docs/films/）。
+- 模板工程含 8 个场景 + 一段配乐；new_reel.py 从模板起片并把抽中的风格写进项目 STYLE.md。
+- 设计立场：时间先有网格再有镜头（一个小节一个场景，音画共用时间轴，剪辑点天然落强拍）；颜色是算出来的（分色网点乘法叠印）；品牌色必须实测，不凭印象挑。
+- references/gotchas.md 记录约 40 条坑（症状都不指向真因），performance.md 有逐算子 CPU/CuPy 实测。
 
 ## 4. 我学到了什么
 
-- 「代码即视频」把视频制作变成了软件工程：有版本、diff、组件复用、CI 渲染，正好匹配 coding agent 的能力结构。
-- 便宜模型可用的关键不在模型本身，而在脚手架：强约束的模板边界、清晰的 prop 契约（title/slides/theme/cta）、渲染结果回喂校验。这和本组「确定性逻辑用规则代码、模型只贴判断点」的口径一致。
-- 效果对标锚点：Opus 5.5 的 motion graphics 是当前社区公认天花板，可作为评审基线。
+- 「便宜模型能出贵模型效果」的真正杠杆是一个强约束、高内聚的 Skill 脚手架：引擎把自由发挥空间收窄成风格牌+模板，模型只负责在固定语法里填充，于是模型档位可以下沉。这与本组「确定性逻辑用规则代码、模型只贴判断点」的口径完全一致。
+- 点云画家算法是个聪明的工程取舍：避开 Python 逐三角形性能陷阱，还顺带获得铜版雕刻式颗粒美学——约束变成风格。
+- 音画共用时间网格（120 BPM、小节即场景）解释了截图片头那行 `120 BPM` 参数：它是结构参数不是装饰。
 
 ## 5. 它是否可信，哪些需要验证
 
-- 可信部分：Remotion + coding agent 生成动态图形是成熟路线，官方文档和多个独立视频证实；Opus 5.5 在 motion graphics 上的跃升有多方实测。
-- 未验证：博主「普通模型 ≈ Opus 5.5 效果」的具体方法与真实成片质量——截图仅一帧，属标题级主张，可能有选择性展示。
-- 待验证清单：
-  1. 追到原视频，看其技术栈是否就是 Remotion（也可能是 Motion Canvas / manim / After Effects 脚本）；
-  2. 用同一模板分别跑普通模型与 Opus 5.5，对比一次成功率和返工轮数（成本而不仅是画质）；
-  3. 字体/音乐素材的授权问题——成片好看常依赖付费素材，而非模型能力。
+- 可信度较高：仓库真实公开、README 给出 8 支可播放的循环预览 GIF 和完整成片目录、依赖与结构具体可跑、协议清晰（MIT + OFL）。
+- 作者自述（DeepSeek Flash 独立跑通）属单方主张，需自验。
+- 待验证：
+  1. 本地 clone 实测：用我们的普通模型（如 DeepSeek V4 Flash / 豆包 lite）按 SKILL.md 跑一条，记录轮数、耗时、CPU 渲染时长、返工点；
+  2. 与 Opus 5.5 同任务对比一次成功率；
+  3. 15 秒/450 帧之外的长度与定制化空间（非模板需求是否立刻失稳）；
+  4. 渲染性能（未上 GPU 时全片耗时，perf_probe.py 可测）。
 
 ## 6. 对个人能力有什么价值
 
-- 掌握「提示词 → 可渲染视频工程」的模板化写法后，产品 demo、数据可视化短片、课程片头可批量自产，不必等设计资源。
-- 是练习「给 agent 建脚手架」的好场景：模板分层、spec 驱动、自动渲染校验，方法可直接迁移到其他代码生成任务。
+- 直接获得「一句话 → 可发布短片」的能力：产品 demo 片头、数据报告动态摘要、课程/分享标题卡可批量自产。
+- 是研究「如何给 Agent 写好一个 Skill」的优质样本：触发条件、模板分层、风格约束、gotchas 沉淀、性能自检一应俱全，写法可迁移到本组其他 Skill。
 
 ## 7. 对企业 AI 落地有什么价值
 
-- 市场/运营内容生产：产品介绍、数据报告、展会循环视频等结构化短片，可用模板 + 普通模型低成本批量产出，按 9:16/16:9 换版不需重做。
-- 成本路径清晰：模型费可下沉，主要成本是一次模板建设和渲染算力，避免按条付费用生成式视频 API。
-- 边界：实拍/真人/强叙事内容不适用，仍需 Veo/可灵类扩散模型或传统拍摄。
+- 市场/运营内容生产：15 秒品牌短片、展会循环视频、社媒片头，零素材采购、零 AE 人力，换风格牌即换片；品牌色按实测读取即可做企业版。
+- 成本结构：模型费可下沉到 Flash 档，成本主要是一次性 CPU 渲染；全部本地运行，素材和脚本不出内网，数据安全面干净。
+- 边界：仅限程序化动态图形/3D 点云风格；实拍、真人、写实场景、复杂叙事不适用。
 
 ## 8. 可做的小实验
 
-- 待晶晶确认后再动手（本轮只做调研）：
-  1. 用 Remotion 官方模板起项目，Codex 接普通模型，复刻截图这种「深色科技标题卡」30 秒片段；
-  2. 同一 prompt 分别用普通模型和 Opus 5.5 各跑 3 条，记录轮数/耗时/成本/成片评分；
-  3. 沉淀一份本组的视频模板 spec（标题、章节、数据图表、CTA）。
+- 待晶晶确认后再动手：
+  1. clone 仓库，装 numpy/Pillow/ffmpeg，用模板先渲染默认片验证环境；
+  2. 让普通模型抽一张风格牌、改一套品牌内容（标题/配色/排版）出一条 15 秒片；
+  3. 记录全流程真实成本，产出一页实测纪要。
 
 ## 9. 风险和边界
 
-- 版权：模板中使用的字体、音乐、商标素材需授权，Remotion 本身不解决素材授权。
-- 幻觉/返工：普通模型易写出时间轴错位、帧溢出的代码，必须强制渲染校验，返工成本可能抵消模型差价。
-- 「标题党」风险：短视频平台只放最惊艳片段，真实稳定性和工作流完整度需看原片。
+- 版权：代码 MIT、随包字体 OFL 1.1，商用需保留 NOTICE；自创品牌内容时输入素材的授权仍由使用者负责。
+- 零外部素材意味着画面风格局限于引擎表达力，客户定制到特定写实风格时会撞墙。
+- 小红书视频是精选成片展示，普通模型真实一次成功率仍待实测，返工成本可能抵消模型差价。
 
 ## 10. 当前结论
 
-方向真实且已产品化（Remotion 官方支持 coding agent），「普通模型平替 Opus 5.5」在模板化场景下逻辑成立但证据仅一帧截图，标记**待追源、待验证**。下一步优先拿到原视频确认技术栈，再决定是否做双模型对照小实验。
+项目本体已追到，质量证据（8+ 支成片）比上一张截图时充分得多，价值阶段从「待追源」升级为**可小实验**：这是「强 Skill 脚手架让模型档位下沉」论点的一个具体、可本地验证的样板。建议下一步直接 clone 实测普通模型跑片成本。
