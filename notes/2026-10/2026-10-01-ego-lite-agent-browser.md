@@ -3,8 +3,9 @@ title: "ego (lite)：人和 Agent 共用的浏览器——代码驱动的浏览�
 date: 2026-10-01
 discovery_source:
   type: 视频截图
-  title: "一个Skill让Agent自动操作浏览器，告别重复枯燥任务（技术爬爬虾，B站，33.3万播放）"
-  url: https://www.bilibili.com/video/BV1ooDyBmE6v
+  title: "一个Skill让Agent自动操作浏览器，告别重复枯燥任务（技术爬爬虾，B站，33.3万播放，2026-07-21）"
+  url: https://www.bilibili.com/video/BV1aDKb6pEnJ
+  companion_opus: https://www.bilibili.com/opus/1225344918250061828
 primary_object:
   type: open_source_project
   name: ego (lite) / citrolabs/ego-lite
@@ -35,14 +36,19 @@ Claude Code / Codex / Cursor / Hermes 等任何会写代码的 Agent 在后台 S
 
 ## 2. 原始来源
 
-- 发现入口：B站 UP主"技术爬爬虾"视频截图（33.3万播放 / 2.8万赞 / 3.7万收藏，
-  视频内投票"最近用哪个 Agent"：Codex、Claude Code、WorkBuddy）
-- 仓库本体：https://github.com/citrolabs/ego-lite （MIT，14.4k star）
+- 发现入口：B站 UP主"技术爬爬虾"视频截图——视频本体为 BV1aDKb6pEnJ（2026-07-21
+  发布，33.3万播放 / 2.8万赞 / 3.7万收藏 / 777 评论）。视频内投票"最近用哪个 Agent"：
+  Codex、Claude Code、WorkBuddy、其他；视频顶部露出的 opus 链接是 UP主配套动态
+  （放安装命令和官网地址用），[call] 是终端调用片段。收藏数高于点赞数，典型的
+  实用工具教程"先马后看"数据特征。
+- 仓库本体：https://github.com/citrolabs/ego-lite （MIT，14.4k star，2026-07 第三方
+  文章记录时还只有 7900 star，两个月涨到 14.4k，热度上升中）
 - 官网/文档：https://lite.ego.app 、https://lite.ego.app/document/
 - 第三方实测：腾讯新闻《实测ego lite，给我Codex浏览器自动化加到2.5倍速了！》
   https://news.qq.com/run/a/20260730A09SPF00
-- 同主题前作：技术爬爬虾《告别一切重复枯燥任务，CLI+Skill搭建浏览器AI自动化框架》
-  （playwright-cli 方案）——可见该赛道半年内从 CLI 方案进化到内核定制浏览器方案
+- 同 UP主前作：BV1ooDyBmE6v《告别一切重复枯燥任务，CLI+Skill搭建浏览器AI自动化框架》
+  （2026-04，playwright-cli 方案，同期播放量也是 33.3 万量级）。两期视频相隔三个月，
+  正好展示该赛道从 CLI 方案进化到内核定制浏览器方案的路线。
 
 ## 3. 核心观点 / 核心能力
 
