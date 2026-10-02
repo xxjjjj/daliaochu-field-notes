@@ -94,6 +94,33 @@ PenguinHarness 是一个开源、本地优先（local-first）的多 Agent 应�
 - 项目成熟度低，接口和功能可能快速变动，不适合承载关键业务。
 - 向第三方 provider 发数据仍受公司数据外发规范约束。
 
+## 9b. 同类应用与社区反馈（2026-10-02 补充）
+
+同类要分两层看：
+
+**A. 「用 Agent 构建 Agent」的应用平台（PenguinHarness 直接对标）**
+
+| 项目 | 定位 | 社区反馈要点 |
+| --- | --- | ---|
+| Dify | 可视化拖拽 Agent/RAG 平台，团队迭代快 | 最主流选择之一；6 个月实测反馈：简单场景（客服/线索/内容生成）交付从 1-2 月缩到 1-2 周、生产力约 +60%；但复杂流程画布变"意大利面条"（23 节点已难维护）、自定义代码节点沙箱限制大、复杂业务逻辑和实时集成是短板 |
+| Coze Studio（字节，已开源） | 拖拽编排 + 插件生态 | 新但有字节背书，部署比 Dify/n8n 复杂，被看好 |
+| FastGPT | 聚焦企业知识库问答 | 口碑集中在 RAG 场景；已推商业版，社区担心高级功能逐步进付费版 |
+| n8n | 跨服务自动化工作流 + AI 节点 | 自托管最友好、社区和教程最成熟、有公司支撑最稳；但本质是工作流工具不是 Agent 框架 |
+| LangChain/LangGraph + Deep Agents | 开发者库，有状态图、检查点回放 | 生态地基，灵活但要写代码、学习成本高；进程死亡需自行处理状态 |
+| RAGFlow | RAG 专精 | 切片/检索口碑好，场景窄 |
+| TrueForge（TrueFoundry） | 生产级、自托管、模型中立 | 面向把 Agent 嵌进产品的团队，主打治理/审计；年轻，且是厂商自家博客口径 |
+
+**B. 「薄 Harness / 低 token 运行时」（成本路线同类）**
+
+- **DeepSeek Harness（dsh）**：2026-08-13 发布，两周约 203k stars 反超 OpenCode；一切皆插件（含 agent loop），但官方明说是 developer preview、承诺有破坏性变更，web-UI 优先而非 TUI。
+- **Pi**：Armin Ronacher（Flask 作者）和 Mario Zechner 做的 sub-1,000 token harness，三个月从 54k 涨到 98k stars。r/LocalLLaMA 反馈：装上 pi-lsp 后体验提升大；独立测帖称 token 大幅节省、solve rate 与重型 harness 可比——但很早期，无一等 tracing/eval、不自带代码沙箱（需外接）、上下文压缩有意做成有损的。
+- **OpenCode**：约 202k stars，开源版 Claude Code 事实标准，provider 中立、TUI 成熟。
+
+**关于 PenguinHarness 自身的社区声量（重要信号）：**
+- Product Hunt 页面仅约 46 followers，Reddit/HN 几乎搜不到独立使用反馈或质疑帖；中文社区（知乎/V2EX）也未见实质讨论。
+- 2.3k stars 相对于"社区讨论近乎无声"反差明显——说明它目前主要靠官方渠道（README、Product Hunt、微信社群、hiyouga 个人影响力）传播，**尚无足够的第三方真实使用样本来判断口碑**，这本身就是比 benchmark 更值得警惕的信号。
+- 对比之下，同样走"薄/省 token"路线的 Pi 在 r/LocalLLaMA 已有大量独立讨论和复测。同路线里 PenguinHarness 的社区验证度目前最低。
+
 ## 10. 当前结论
 
 真实存在且背景可信的新项目，代表"薄 Harness + Agent 自进化"路线，值得列入雷达和低成本小实验名单；但所有成本/性能宣传均为未公开、不可复现的厂商自报，结论暂定为**待验证**，不进生产、不做选型背书。下一步价值最高的动作是用我们自己的 ark-plan 端点实测一次。
