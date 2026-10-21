@@ -41,6 +41,38 @@ UP 主把 Felix 的方法翻成三句话——**往上想一层、往下挖一�
 - 一手本体（Karpathy）：2026-10-11 X 帖（原帖 4 月发布，10 月重发）；第三方逐条解读与数据核对 https://cellcog.ai/blog/karpathy-llm-understanding-funnel
 - UP 主原视频链接：群消息未附，待补。
 
+## 2b. 一手原文摘录（2026-10-21 补，均为本人原话）
+
+### Felix Rieseberg（How I AI 节目，YouTube -tdNsYi8AXs，字幕逐字）
+
+抽象层上移（家具例子原话）：
+> "There was a brief moment where I started entering manual furniture... In the middle of it, I was like, 'What am I doing? I'm just going to tell Claude I have this piece of furniture.' And then I went another step up. I was like again, what am I doing? Why do I need to tell Claude what kind of furniture I have? ... applying this step up in abstraction of the task and doing that over and over and over again, and then spending all of my energy on the piece that is more fun and more creative."
+
+Anti-to-do list（他给高管带教时的规则）：
+> "My rule I call the anti-to-do list: anytime you're doing something that's tedious, I smack their hands — why are you doing this, your hands are not allowed to touch this, you need to go ask again, go that abstraction layer up, how could Claude do this, and then how could I never do this again."
+
+再上一层=系统化：
+> "The next abstraction would be what's the system that in a year or two, if I have to ask this question again, it's already there and ready for me to go."
+
+调试工作流不是调试模型：
+> "I usually try to debug my workflow... 'Here's what I actually expected. Can you walk me through at what point something went different, or how we can prevent this in the future?' ... The learning I take away is not 'Claude can't do this'... I can change the harness, the prompt... Usually my answer is to also involve Claude and say, 'Claude, what do you think we can do here?'"
+
+模型选择：
+> "For most tasks Sonnet 4.6 is very very good... I reach for Opus if I have self-identified as someone who doesn't really know yet what they're asking for."（Opus 的价值是把笼统问题分解成具体问题）
+
+### Karpathy 原推全文（X @karpathy，2026-10-11 19:12 UTC，6.6M views，本人 napkin math）
+
+> "Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*. It's now less 'two groups of people speaking past each other' and more a sharp funnel.
+> - Napkin math somewhere around 6B people (~75%) have barely come in contact with LLMs at all.
+> - Around 1-2B (~20%) are casual and infrequent users of free-tier ChatGPT-like products. This group sees derpy chatbots and treats them like a better Google search, a writing aid... Even many professionals outside math&code are in this tier. Execs spend a lot of time talking to other people, so while they understand intellectually, it is still second-hand and abstract.
+> - Somewhere around 20M people (0.2%) see first-hand that large, complex projects that used to take them weeks/months can now be completed by agents with a prompt. Building apps, copying apps, translating apps, decompiling apps from binaries... Less than 1 year ago, I was writing code manually by hand, occasionally pressing Tab to autocomplete.
+> - ~5,000 people (~0.00006%) with access to frontier-grade systems internally... swarms of thousands of agents collaborating over weeks on software mega projects: minting zero days, cyber attacks and defenses at machine speeds, discovering new science... human review and comprehension are starting to fall behind.
+>
+> The funnel is driven by: 1. Impact scales with ambition, problem size, and horizon. A question with a paragraph answer barely stresses the system. You need a reservoir of big, difficult problems that you really care about. 2. The jaggedness of the system. Capability peaks in domains that are digital, verifiable and economically valuable — RL on verifiable rewards. 3. Access. Free-tier, paid-tier, internal.
+> ... And it is all happening at the same time."
+
+原推：https://x.com/karpathy/status/2109361546505966046（4 月原推 /status/2042334451611693415）
+
 ## 3. 核心观点 / 核心能力
 
 ### 3.1 Felix 的一手框架（节目原话核实）
