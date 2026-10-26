@@ -124,3 +124,20 @@ public_level: sanitized
 ## 10. 当前结论
 
 ego lite 值得进入“小实验”阶段。它代表的方向不是简单替代 Playwright，而是把浏览器变成 Agent 可共享、可并行、可复用经验的工作环境。对我们最有参考价值的是“真实登录态 + Space 隔离 + 语义 snapshot + Skill 化接入”这套组合，但在企业内部落地前，必须先验证安全边界、只读模式、日志审计和失败恢复。
+
+## 11. 2026-10-26 复查（时隔 3 个月）
+
+晶晶在打捞处重新问起，复查 GitHub 与官网，项目不仅活着，而且明显起量：
+
+- **GitHub `citrolabs/ego-lite`：17.6k stars、964 forks、456 commits**（7 月记录时未记 star 数，量级已属热门）；仓库结构新增 `.claude-plugin`、`.codex/skills`、`.agents`、`plugins/`、`spec/`，官方 Agent 集成面从"一个 ego-browser skill"扩成多 harness 插件化分发。
+- README topics 仍显式挂着 `hermes-agent`，与 Hermes 的对接是官方宣称路径之一（未实测）。
+- 官网发布了**横向 benchmark（厂商自测，非第三方）**：复杂网页任务平均 398s/任务（对比 chrome-devtools-cli 587s、playwright-cli 648s，快 47–63%）；完整成功率 **93.5%**（browser-harness 77.4%、playwright-cli 71%）；平均成本 **$1.64/任务**（playwright-cli $3.42）。关键卖点是 Agent 可把多步动作合成几条 JS 一次执行，而非逐步等工具往返。
+- 技术口径更新：语义 snapshot 现在明确说是在**定制 Chromium 引擎内部构建**（不是往页面注入脚本），因此能穿透跨域 iframe、shadow DOM、Stripe/Salesforce/Intercom 这类第三方挂件和 React portal——这是注入式工具的盲区，对销售易这类重度 B 端页面有实际意义。
+- 隐私口径：书签/历史/cookie/密码全部本地存储，官方服务端唯一记录是"你是否勾选了 Chrome 数据迁移"。浏览器本体仍是免费闭源二进制，仓库（MIT）只是 agent-facing tooling，这一点没有变。
+- README 已做 7 语种翻译（含日/韩，但无中文）。
+
+判断更新：
+
+1. 热度和工程活跃度支持从"可小实验"上调到"**值得安排实测**"，但 93.5% 成功率和速度数字是**厂商自测 benchmark**，按本仓库规矩只能当线索；真实判据仍是我们自己在飞书/销售易页面上跑只读任务的成功率。
+2. 旧笔记第 5 节的待验证清单仍然全部成立，一条都没被官方材料消解；企业落地的核心风险（真实登录态、误写操作、审计）没变。
+3. 下一步若晶晶点头：装 ego(lite) + ego-browser skill，用公开站点和一个内部只读页面（不迁 Chrome 主 profile，单独建测试 profile）跑 3 个任务，实测耗时/成功率/token，与现有 Hermes browser 工具链对比。
