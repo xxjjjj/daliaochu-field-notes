@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家里的日子 · 原型</title>
+<script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.6.12/lunar.js"></script>
+<style>
+  :root{--bg:#faf7f2;--ink:#2b2620;--sub:#8a8175;--line:#e8e0d4;--red:#b04a3a;--card:#fff;--accent:#c8a96a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);padding:20px;max-width:720px;margin:0 auto;line-height:1.6}
+  h1{font-size:22px;margin:8px 0 2px}
+  .tagline{color:var(--sub);font-size:13px;margin-bottom:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+  .card h2{font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .card h2::before{content:"";width:4px;height:15px;background:var(--accent);border-radius:2px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  input,select,button{font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+  input{flex:1;min-width:90px}
+  button{cursor:pointer;background:var(--ink);color:#fff;border:none}
+  button.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .person{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .person:last-child{border-bottom:none}
+  .person .meta{color:var(--sub);font-size:12px}
+  .person .del{color:var(--sub);cursor:pointer;background:none;border:none;font-size:16px}
+  .day{padding:12px 0;border-bottom:1px dashed var(--line)}
+  .day:last-child{border:none}
+  .day .date{font-weight:600;font-size:14px}
+  .day .lunar{color:var(--sub);font-size:12px;margin-left:8px}
+  .event{margin-top:6px;padding:8px 12px;background:#fdf6ec;border-radius:8px;font-size:14px}
+  .event.birthday{background:#fbeee8;border-left:3px solid var(--red)}
+  .event .countdown{color:var(--red);font-weight:600}
+  .digest{font-size:15px;white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px}
+  .copybtn{margin-top:10px}
+  .muted{color:var(--sub);font-size:12px}
+  .sun{color:var(--sub);font-size:12px;margin-top:2px}
+</style>
+</head>
+<body>
+<h1>家里的日子</h1>
+<div class="tagline">不是万年历，是帮你记住老家那些日子的小秘书 · 原型 v0.1（数据只存在你浏览器里）</div>
+
+<div class="card">
+  <h2>① 把家里人录进来（农历公历随便说）</h2>
+  <div class="row">
+    <input id="pname" placeholder="称呼，如 妈妈" style="max-width:110px">
+    <select id="ptype"><option value="solar">公历生日</option><option value="lunar">农历生日</option></select>
+    <input id="pdate" placeholder="1965-06-09 或 农历 六月初九" style="flex:2">
+    <select id="pcity" style="max-width:120px"></select>
+    <button onclick="addPerson()">添加</button>
+  </div>
+  <div class="muted" style="margin-top:6px">农历直接输数字，如 <b>1965-6-9</b> 表示农历乙巳年六月初九；闰月勾这里：<input type="checkbox" id="pleap" style="transform:scale(1.2)"></div>
+  <div id="people" style="margin-top:10px"></div>
+</div>
+
+<div class="card">
+  <h2>② 未来 30 天，家里有哪些日子</h2>
+  <div id="upcoming"><div class="muted">先添加一位家人</div></div>
+</div>
+
+<div class="card">
+  <h2>③ 本周一句话（这是每周一早上自动推给你的样子）</h2>
+  <div id="digest" class="digest">添加家人后自动生成。</div>
+  <button class="ghost copybtn" onclick="copyDigest()">复制这段话</button>
+</div>
+
+<div class="card">
+  <h2>④ 年底那本家历的样子（示例：今年每个人的生日落在哪天）</h2>
+  <div id="annual"></div>
+</div>
+
+<script>
+const CITIES={
+  "上海":[31.23,121.47],"淄博":[36.81,118.05],"北京":[39.90,116.40],"广州":[23.13,113.26],
+  "成都":[30.57,104.07],"杭州":[30.27,120.15],"西安":[34.34,108.94],"乌鲁木齐":[43.83,87.62],
+  "哈尔滨":[45.80,126.53],"昆明":[25.04,102.71],"武汉":[30.59,114.30],"长沙":[28.23,112.94]
+};
+const STORE_KEY="family_days_v1";
+let people=JSON.parse(localStorage.getItem(STORE_KEY)||"[]");
+const $=id=>document.getElementById(id);
+const today=new Date(); today.setHours(0,0,0,0);
+
+function fillCities(){
+  $("pcity").innerHTML=Object.keys(CITIES).map(c=>`<option>${c}</option>`).join("");
+}
+function save(){localStorage.setItem(STORE_KEY,JSON.stringify(people));render();}
+
+function addPerson(){
+  const name=$("pname").value.trim(); if(!name){alert("先填称呼");return;}
+  const t=$("ptype").value, parts=$("pdate").value.trim().split(/[-/.]/).map(Number);
+  if(parts.length!==3||parts.some(isNaN)){alert("日期格式如 1965-6-9");return;}
+  const [y,m,d]=parts;
+  people.push({name,type:t,y,m,d,leap:$("pleap").checked,city:$("pcity").value});
+  $("pname").value="";$("pdate").value="";$("pleap").checked=false;
+  save();
+}
+function delPerson(i){people.splice(i,1);save();}
+
+// 农历/公历生日 → 今年（或明年）的公历日期
+function birthdaySolar(p, year){
+  if(p.type==="solar"){
+    // 公历 2/29 兜底
+    const dt=new Date(year,p.m-1,p.d);
+    if(p.m===2&&p.d===29&&dt.getDate()!==29) return new Date(year,2,1);
+    return dt;
+  }
+  try{
+    const l=Lunar.fromYmd(year,p.m===1&&p.leap?-1*year:year,p.m,p.d); // leap handled below
+    return null;
+  }catch(e){return null;}
+}
+// 农历生日 → 指定年份的公历日期。
+// 普通月：直接 fromYmd(year,m,d)，该月若只有29天则30日生日回退到29。
+// 闰月：先试该年闰月 (-m)，无此闰月则回退普通月，并在 note 标明。
+function lunarBirthdayThisYear(p, year){
+  const mk=(mm)=>{try{const s=Lunar.fromYmd(year,mm,p.d).getSolar();
+    return Solar.fromYmd(s.getYear(),s.getMonth(),s.getDay()).toDate();}catch(e){
+    try{const s=Lunar.fromYmd(year,mm,p.d-1).getSolar();
+      return Solar.fromYmd(s.getYear(),s.getMonth(),s.getDay()).toDate();}catch(e2){return null;}}};
+  if(p.leap){
+    const leap=mk(-p.m);
+    if(leap)return{date:leap,note:"（今年有闰月，按闰月过）"};
+    const norm=mk(p.m);
+    return norm?{date:norm,note:"（今年无闰"+p.m+"月，按常规六月过）"}:null;
+  }
+  const dt=mk(p.m);
+  return dt?{date:dt,note:""}:null;
+}
+function nextBirthday(p){
+  for(let y=today.getFullYear();y<=today.getFullYear()+2;y++){
+    let dt,note="";
+    if(p.type==="solar"){
+      dt=new Date(y,p.m-1,p.d);
+      if(p.m===2&&p.d===29&&dt.getDate()!==29)dt=new Date(y,2,1);
+    }else{
+      const r=lunarBirthdayThisYear(p,y);
+      if(!r)continue; dt=r.date; note=r.note;
+    }
+    dt.setHours(0,0,0,0);
+    const diff=Math.round((dt-today)/86400000);
+    if(diff>=0)return{date:dt,diff,age:y-p.y,year:y,note};
+  }
+  return null;
+}
+function fmtDate(dt){
+  const l=Solar.fromDate(dt).getLunar();
+  const week=["周日","周一","周二","周三","周四","周五","周六"][dt.getDay()];
+  return `${dt.getMonth()+1}月${dt.getDate()}日 ${week} · 农历${l.getMonthInChinese()}月${l.getDayInChinese()}`+(l.getJieQi()?` · ${l.getJieQi()}`:"");
+}
+function sunTime(lat,lng,date,sunrise){
+  const zenith=90.833;
+  const N=Math.floor((Date.UTC(date.getFullYear(),date.getMonth(),date.getDate())-Date.UTC(date.getFullYear(),0,1))/86400000)+1;
+  const lngHour=lng/15;
+  const t=N+((sunrise?6:18)-lngHour)/24;
+  const M=0.9856*t-3.289;
+  const L=(M+1.916*Math.sin(M*Math.PI/180)+0.02*Math.sin(2*M*Math.PI/180)+282.634)%360;
+  let RA=Math.atan(0.91764*Math.tan(L*Math.PI/180))*180/Math.PI;
+  RA=(RA+360)%360;
+  RA=(RA+(Math.floor(L/90)*90-Math.floor(RA/90)*90))/15;
+  const sinDec=0.39782*Math.sin(L*Math.PI/180);
+  const cosDec=Math.cos(Math.asin(sinDec));
+  const cosH=(Math.cos(zenith*Math.PI/180)-sinDec*Math.sin(lat*Math.PI/180))/(cosDec*Math.cos(lat*Math.PI/180));
+  if(cosH>1||cosH<-1)return null;
+  const H=(sunrise?360-Math.acos(cosH)*180/Math.PI:Math.acos(cosH)*180/Math.PI)/15;
+  const T=H+RA-0.06571*t-6.622;
+  let UT=(T-lngHour)%24; if(UT<0)UT+=24;
+  const local=(UT+8)%24;
+  const h=Math.floor(local);const m=Math.round((local-h)*60);
+  return String(h).padStart(2,"0")+":"+String(m%60).padStart(2,"0");
+}
+function sunLine(city,date){
+  const [lat,lng]=CITIES[city];
+  const sr=sunTime(lat,lng,date,true),ss=sunTime(lat,lng,date,false);
+  return sr?`${city} 日出 ${sr} / 日落 ${ss}`:"";
+}
+function ageText(p,b){
+  return p.type==="lunar"?`${b.year-p.y} 虚岁上下`:`满 ${b.age} 岁`;
+}
+
+function render(){
+  // 家人列表
+  $("people").innerHTML=people.map((p,i)=>
+    `<div class="person"><span>${p.name} <span class="meta">${p.type==="lunar"?"农历":"公历"} ${p.y}-${p.m}-${p.d}${p.leap?"(闰)":""} · ${p.city}</span></span><span class="del" onclick="delPerson(${i})">×</span></div>`
+  ).join("")||'<div class="muted">还没有家人</div>';
+
+  // 未来 30 天
+  const list=[];
+  people.forEach(p=>{const b=nextBirthday(p);if(b&&b.diff<=30)list.push({p,b});});
+  list.sort((a,b2)=>a.b.diff-b2.b.diff);
+  $("upcoming").innerHTML=list.length?list.map(({p,b})=>
+    `<div class="day"><span class="date">${fmtDate(b.date)}</span>
+      <div class="event birthday">🎂 ${p.name}的生日（${ageText(p,b)}）<span class="countdown">${b.diff===0?"就是今天！":"还有 "+b.diff+" 天"}</span></div>
+      <div class="sun">${sunLine(p.city,b.date)}</div></div>`
+  ).join(""):'<div class="muted">未来 30 天家里没有生日。忌日/纪念日功能在下一版。</div>';
+
+  // 全年生日
+  const annual=people.map(p=>{
+    const y=today.getFullYear();
+    const dt=p.type==="solar"?new Date(y,p.m-1,p.d):lunarBirthdayThisYear(p,y);
+    return dt?`<div class="person"><span>${p.name} · ${y} 年生日</span><span class="meta">${fmtDate(dt)}</span></div>`:"";
+  }).join("");
+  $("annual").innerHTML=annual||'<div class="muted">添加家人后自动排好</div>';
+
+  // 本周一句话
+  if(people.length){
+    const soon=list.slice(0,3);
+    const now=today;
+    const parts=[];
+    parts.push(`这周家里的日子：`);
+    if(soon.length){
+      soon.forEach(({p,b})=>{
+        if(b.diff===0)parts.push(`\n· 今天就是${p.name}生日，先发条消息，礼物还没到就别等了。`);
+        else if(b.diff<=3)parts.push(`\n· ${p.name}生日在 ${b.date.getMonth()+1}月${b.date.getDate()}日（${b.diff} 天后，${["周日","周一","周二","周三","周四","周五","周六"][b.date.getDay()]}），${p.city}那天 ${sunLine(p.city,b.date).split("/")[1]?.trim()||""}，该下单/订票了。`);
+        else parts.push(`\n· ${p.name}生日还有 ${b.diff} 天（${b.date.getMonth()+1}月${b.date.getDate()}日），本周可以先把礼物买了。`);
+      });
+    }else{
+      parts.push(`\n· 未来 30 天没有生日，但别忘了给家里打个电话。`);
+    }
+    const p0=people[0];
+    parts.push(`\n· 今天${p0.city}：${sunLine(p0.city,now)}。`);
+    parts.push(`\n（节气、农历日期、日落时间都是程序按经纬度和历法算死的，不是 AI 编的。）`);
+    $("digest").textContent=parts.join("");
+  }
+}
+function copyDigest(){navigator.clipboard.writeText($("digest").textContent);}
+fillCities();
+// 预置示例数据，方便第一次打开看效果
+if(people.length===0){
+  people=[
+    {name:"妈妈",type:"lunar",y:1965,m:6,d:9,leap:false,city:"淄博"},
+    {name:"爸爸",type:"solar",y:1963,m:11,d:3,leap:false,city:"淄博"},
+  ];
+}
+render();
+</script>
+</body>
+</html>
