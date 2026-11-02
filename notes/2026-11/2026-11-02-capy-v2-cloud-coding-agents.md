@@ -54,13 +54,22 @@ public_level: public
 - "编码代理"品类在 2026 年的分化方向已经很清楚：**本地单代理（Claude Code/Codex/Cursor 这类 harness）↔ 云端多代理编排（Devin、Capy、Codex Cloud）**。Capy 的差异化不是模型，而是"便宜的云 VM 底座 + 多代理并行 + 嵌进 GitHub/Slack"，和我们自己"贵模型指挥便宜模型、小军团"的判断同向。
 - 它自己不造全部轮子：持久化工作流用 Trigger.dev（开源）、算力用 RunPod、检索用 exa、抓取用 Firecrawl——**云代理产品本质是编排层，生态组件大量可替换**，这对自研是利好信号。
 
-## 5. 它是否可信，哪些需要验证
+## 5. 它是否可信，哪些需要验证（2026-11-02 二轮深挖）
 
-- **高可信**（官网/YC/GitHub 一手可查）：产品形态、云端 VM、BYO Key、定价档位、SOC 2、与 Trigger.dev 的关系、70k+ 用户为官网自称。
-- **低可信/需验证**：
-  - "DeepSWE 超 Claude Code/Codex/Devin/Cursor、便宜 50%"——目前只见厂商与自媒体转述，未见独立复测，benchmark 与真实大型脏代码库表现是两回事（LinkedIn 原文作者自己也强调这点）。
-  - "5万/7万工程师"是注册口径，不等于活跃付费。
-  - 视频是引流向内容（合集已 254 集），能力展示（8分27秒修一个表单持久化 bug）是精心挑选的小任务，不能外推到复杂工程。
+- **高可信**（官网/YC/GitHub 一手可查）：产品形态、云端 VM、BYO Key/订阅、定价、SOC 2、Trigger.dev 客户关系。
+- **"DeepSWE 超越 Claude Code/Codex/Devin/Cursor"基本不可比**：DeepSWE 官方榜（deepswe.datacurve.ai）固定用 mini-swe-agent harness 测**模型**，榜上只有 GPT-5.x、Claude、Gemini、GLM、Kimi 等模型，没有 Capy 这个产品位。Capy 的说法是厂商用自家 harness 自测；而 2026 年该领域已反复证明 harness/重试策略对分数影响极大（公开案例：同一模型 44%→100% 的摆动，pass@1 与 pass@k 差异巨大）。结论：这是营销口径，不是独立第三方排名。
+- **独立社区反馈稀薄且偏冷**：
+  - HN 没有 capy.ai 的 Launch 帖；全站检索仅一条真实用户提及（nocobot, 2026-04）："试过 capy.ai、conductor 这类编排产品，没被打动，验证 LLM 输出对不对还不如自己写快"。
+  - Reddit 无深度实测帖；YouTube 上是引流向"INSANE/FREE"视频，不构成证据。
+  - 大量"2026 最佳 AI 编程工具第 1 名 Capy"文章出自 SEO 内容农场（origami.chat 类）和 Capy 自家官网文章矩阵（capy.ai/articles 下几十篇 vs 竞品对比），引用时应按厂商营销处理。
+  - 同名陷阱：HN/GitHub 上 capysc/capy-cli（团队密钥管理）、giga-dylan/capy（本地 Ollama harness）均与 capy.ai 无关。
+- 用户规模"5万→7万工程师"为注册口径，无活跃/付费佐证；产品 2025-04 才建号，V2 很新（2026 年 10 月），长期稳定性无历史。
+
+### 实际能力边界（综合官网演示+同类产品共识）
+
+- 擅长：任务可清晰分解、结果可程序验证的场景——小 bug 批量清理、框架/依赖迁移（官网案例 Next.js→TanStack Start，单 PR 改 3.8 万行 lockfile）、文档、E2E 测试、PR 初审+自动回修、Slack 内异步派活。
+- 不擅长/无证据：大型遗留代码库的新功能、架构决策、需要业务上下文的改动；行业普遍反馈仍是"每次都要人审查和收尾"。
+- 成本结构注意：Pro $80/月只含 $105 点数，并行 VM + 模型调用另烧点数，重度使用实际月支出可能数倍于订阅标价（行业区间 $200–600/工程师/月）。
 
 ## 6. 对个人能力有什么价值
 
