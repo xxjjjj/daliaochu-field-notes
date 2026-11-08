@@ -76,7 +76,47 @@ public_level: public
 
 视频的核心判断成立且与一手资料一致：**企业 Agent 的瓶颈在中间层工程（标准化、注册发现、身份、一致性），不在模型能力**。对我们的价值不是照着搭平台，而是拿到一套行业标准语言和对照表——ESB、BFA 封装、OBO 透传、审批流兜底、Tool RAG 演进——用来给正在做的 CRM AI 化和 RPA 治理定方向、做对标、对外讲清楚为什么这么设计。
 
-## 8. 一手链接
+## 9. 补充：优缺点、落地性与社区真实反馈（2026-11-09 二轮调研）
+
+### 9.1 这套做法真实的优点（有证据支撑的部分）
+
+1. **M×N 对接成本确实下降**：MCP 把"每个 Agent × 每个系统"的定制对接变成协议化接入，这是社区认可度最高的价值，也是 Reddit 上怀疑派也承认的唯一适用场景——"没有 M×N 问题就别上 MCP"。
+2. **Auth 边界是 MCP 相比裸 OpenAPI 的真实优势**：Simon Willison 的判断是 MCP 让 harness 持有 token、Agent 本身拿不到 API key 成为标准做法，外加连接审批 UI 和审计日志，这四点裸 function calling 都要自己造。
+3. **生态已过"能不能用"阶段**：Stacklok 2026 调研（注意：Stacklok 本身卖 MCP 网关，数据有利益相关）称近半数软件公司已在生产用 MCP、19% 广泛生产；AWS 开源了 MCP Gateway & Registry，Expedia Group 在其上做了服务质量分级和组织级工具发现；agentgateway（Solo.io 发起）已捐赠 Linux Foundation。网关/注册中心这条赛道有开源实现和大厂背书，不是 PPT 架构。
+4. **Tool RAG 解决真实痛点**：工具数量上去后，全量 schema 塞进上下文会出现"context rot"——注意力被 JSON schema 稀释、幻觉参数、选错工具，语义预选是目前公认的缓解方向（Red Hat、RAG-MCP 论文、Hermes issue #13332 同向）。
+
+### 9.2 缺点与社区骂点（硬伤，不是理论风险）
+
+1. **安全是系统性的，且已出真实事故**。Invariant Labs 2025-04 首报三类攻击：tool poisoning（工具描述里藏注入指令，模型分不清文档和命令）、rug pull（用户审批后服务器偷改工具描述）、shadowing（一个 server 劫持另一个的工具）。CSA 2026-05 报告引用 OX Security 的披露：一个**协议级设计缺陷**波及约 20 万实例、覆盖 1.5 亿次包下载；截至 2026-05 至少 7 个 high/critical CVE，命中 MCP Inspector、LiteLLM、Cursor（CVE-2025-54135/54136，Tenable 有公告）、LibreChat、Windsurf。HN 原帖 730 分、183 评论，是社区关注度最高的 MCP 话题。
+2. **协议自己还没补完企业级短板**。MCP 官方 2026 roadmap 把审计、企业身份对接、网关控制、跨环境配置列为"enterprise readiness"，并明说这是整个 roadmap 里最不成型的部分，连专门的企业工作组都还没有。即：视频里讲的治理能力，目前主要靠网关厂商补，不是协议原生。
+3. **Tool RAG 继承了 RAG 的检索失败问题**。行业综述口径（Atlan，二手需谨慎）称企业 RAG 项目约 80% 出现过关键失败、其中 73% 败在检索阶段；纯向量检索对部件号、专有名词、行业黑话这类精确术语召回差，实践中必须上关键词+向量混合检索。这意味着"动态发现"本身是个需要持续评测的系统，不是装完就行。
+4. **过度工程是最常见的踩坑**。社区共识（Reddit r/programming、多个 MCP vs function calling 对比文）：Agent 只调两三个 API 时，function calling 更简单、便宜、好调试；每个 MCP 工具定义都吃 context token、每个 server 都是要维护的基础设施。四件套（注册中心+智能网关+STS+流程引擎）是平台级投入，中小规模硬套就是给未来挖坑。
+5. **OBO 解决了身份透传，没解决责任归属**。Christian Posta 明确指出：自治 Agent 自己决定调用时机后，"谁授权的、谁负责"仍是开放问题，微软/AWS 的产品化也只是把 Agent 身份显式记录下来，法律和治理层面没有标准答案。
+
+### 9.3 落地性判断（分规模）
+
+- **工具数 <10 个、单 Agent、内部系统**：不上这套，function calling + 粗粒度封装 + 操作日志足够，这是我们当前 Hermes 技能体系所处的阶段，做法正确。
+- **工具数 10–50、多 Agent/多部门、有写操作**：值得做工具注册台账、语义化描述规范、人审和审计，网关可以借现有 ESB/API 网关演进，不必单建。MCP 可作为新接入的首选封装格式。
+- **平台级（大厂/多租户/SOC2 类合规要求）**：视频里的完整架构才成立，且 2026 年的现实是需要一个 Agentic Gateway 产品（开源 agentgateway、AWS MCP Gateway、Stacklok 等）来补协议没覆盖的治理，自研不现实。
+
+### 9.4 对我们的结论
+
+- 视频架构是**正确的行业终点图，但不是现在的施工图**。我们的最优路径已在发生：借销售易 ESB 上线对齐"统一入口+身份+审计"的语言和能力，BFA 式粗粒度封装继续做，工具描述质量（写清"什么时候用"、带示例、稳定错误结构）是零成本现在就能抓的；完整 Tool Registry、向量工具检索、STS token exchange 暂不自建，等 Hermes 上游（issue #13332）和 ESB 成熟后顺势接。
+- 安全红线先立：任何 MCP/工具接入走白名单审批、工具描述变更要可检测（防 rug pull）、写操作人审、全量调用日志——这四条不依赖平台建设，管理动作即可落地。
+
+### 9.5 二轮调研主要来源
+
+- CSA MCP 安全危机报告（2026-05）：https://labs.cloudsecurityalliance.org/research/csa-research-note-mcp-security-crisis-20260504-csa-styled
+- Invariant Labs tool poisoning 原始披露：https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks
+- HN 热帖"The S in MCP Stands for Security"（730 分）：https://news.ycombinator.com/item?id=43600192
+- MCP 2026 roadmap（The New Stack，2026-03）：https://thenewstack.io/model-context-protocol-roadmap-2026
+- Stacklok State of MCP 2026（厂商调研，注意立场）：https://stacklok.com/resources/state-of-mcp-in-software-2026
+- Simon Willison MCP 观点合集：https://simonwillison.net/tags/model-context-protocol
+- Reddit 怀疑派讨论：https://www.reddit.com/r/programming/comments/1n17vn1/mcp_servers_cant_be_the_future_can_they
+- MCP vs function calling 决策指南：https://jamwithai.substack.com/p/when-to-use-mcp-vs-api-vs-functiontool
+- AWS MCP Gateway & Registry（含 Expedia 采用证言）：https://aws.amazon.com/blogs/opensource/governing-ai-assets-at-scale-with-mcp-gateway-and-registry
+
+## 10. 一手链接（首轮）
 
 - RAG-MCP 论文：https://arxiv.org/html/2505.03275v1
 - Red Hat Tool RAG：https://next.redhat.com/2025/11/26/tool-rag-the-next-breakthrough-in-scalable-ai-agents
