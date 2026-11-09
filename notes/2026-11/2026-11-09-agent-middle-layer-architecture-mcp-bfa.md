@@ -116,6 +116,23 @@ public_level: public
 - MCP vs function calling 决策指南：https://jamwithai.substack.com/p/when-to-use-mcp-vs-api-vs-functiontool
 - AWS MCP Gateway & Registry（含 Expedia 采用证言）：https://aws.amazon.com/blogs/opensource/governing-ai-assets-at-scale-with-mcp-gateway-and-registry
 
+### 9.6 开源系统盘点（2026-11-09 GitHub API 实测 star/license/活跃度，非二手排名）
+
+先分清两个角色：**Registry（通讯录，登记有哪些工具）** 和 **Gateway（前台，管每次调用的安全/路由/审计）**，有的项目只做一个，有的二合一。
+
+| 项目 | star | 语言/license | 定位与边界 |
+|---|---|---|---|
+| modelcontextprotocol/registry（官方） | 7.5k | Go，社区许可 | MCP 官方社区注册中心，只做"通讯录"不做网关；license 非标准 OSI 条款，商用前要读 |
+| agentgateway/agentgateway | 6.1k | Rust，Apache-2.0 | Solo.io 发起、已捐 Linux Foundation；最正统的 Agentic 网关：防 tool poisoning、OpenAPI↔MCP 互译、RFC 8693 token exchange、多租户、可观测；提交活跃（当日有 push）|
+| maximhq/bifrost | 9.5k | Go，Apache-2.0 | AI 网关（管模型流量）+ MCP 网关二合一，单体二进制可气隙部署；目录级身份是企业版功能，免费版调用主体是虚拟 key |
+| BerriAI/litellm | 63k | Python，企业版双授权 | 模型网关事实标准，MCP 能力后加；注意它自己在 CSA 报告的 7 个 MCP CVE 名单里，选型必须跟版本 |
+| stacklok/toolhive | 2.3k | Go，Apache-2.0 | 安全厂商 Stacklok 出品，定位企业级 MCP server 运行与治理平台，偏管控 |
+| docker/mcp-gateway | 1.6k | Go，MIT | 每个 MCP server 跑独立容器、统一入口、注入密钥；**无内置访问控制/审计/密钥治理**，需自建 |
+| TheLunarCompany/lunar (MCPX) | 509 | TS，MIT 核心+商业版 | 权限粒度最细（全局/单服务/单工具三级策略），审计与风险评分在商业版 |
+| agentic-community/mcp-gateway-registry | 1.0k | Go，Apache-2.0 | AWS 开源博客同款，网关+注册中心一体，REST/OpenAPI 管理接口，Expedia 采用证言出处 |
+
+选型口径：要"前台+通讯录"全套且接受 K8s/Rust 运维 → agentgateway；已经有模型网关想合一 → Bifrost；只想要官方标准注册中心 → modelcontextprotocol/registry；容器 shops 且愿意自建治理 → Docker MCP Gateway。**这些项目平均年龄不到 1.5 年，312–5714 个 open issue 不等，没有"装完即稳"的选项，安全 CVE 跟随是长期运维成本。**
+
 ## 10. 一手链接（首轮）
 
 - RAG-MCP 论文：https://arxiv.org/html/2505.03275v1
