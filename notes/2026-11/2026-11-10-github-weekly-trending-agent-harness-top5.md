@@ -46,16 +46,17 @@ public_level: public
 1. **OpenMontage 作者报错**：视频写 `calestio/OpenMontage`，实际作者用户名是 calesthio，仓库已迁到组织 `OpenMontageInc/OpenMontage`，按视频给的地址找不到。
 2. **ThinkRail 的核心前提被漏掉**：它不是通用"AI 智能体编辑器"，而是 JetBrains 孵化器里**围绕 `pi` coding agent 做的 worktree IDE**（官网原话 "the worktree IDE for the pi coding agent"），读 `~/.pi/agent` 配置。不装 pi 用不了，视频没提。
 3. **协议风险只字未提**：OpenMontage 是 AGPL-3.0、Vorssaint 是 GPL-3.0，都是强 copyleft——内部用没问题，一旦要把代码嵌进对外产品/SaaS 提供服务，衍生作品有开源义务。T3 Code（MIT）、OpenMausBot/ThinkRail（Apache-2.0）才是宽松协议。
-4. **"1.33 美元做 60 秒皮克斯风短片"是官方自报案例**，未见第三方独立复测；OpenMontage 自己的文档给的成本区间是 $0.15（纯图片+Remotion 动画）到约 $3（完整动态视频），$1.33 落在区间内但属于厂商营销口径。
-5. OpenMausBot"500 多个应用授权一次全用"未见官方 README 明确数字，疑似对其 MCP/集成目录的概括，待核。
+4. **"1.33 美元做 60 秒皮克斯风短片"是官方自报但配方完整可复现**：README 原文写明构成——6 段 Kling v3 动态片段（经 fal.ai 生成）+ Google Chirp3-HD 旁白 + 免版税钢琴曲 + TikTok 式逐字字幕 + Remotion 合成，合计 $1.33；同页还有一个约 $4 的电影感案例。仍属厂商自报、未见第三方独立复测，但不是无凭据的营销数字。官方文档给的常规成本区间是 $0.15（纯图片+Remotion 动画）到约 $3（完整动态视频）。
+5. **"500 多个应用授权一次全用"属实但有机制前提**：README 原文是 "500+ apps **through Composio**"——能力来自第三方集成平台 Composio（需配 Composio project key），不是 OpenMausBot 自带 500 个连接器。本地聊天不需要任何第三方凭证。
+6. ThinkRail"自带简体中文、能接本地模型"均属实：官方语言含英/日/俄/简中/西班牙语，还支持自放 locale 文件加语言；本地模型走"任意 OpenAI 兼容服务器"——Ollama、LM Studio、llama.cpp、vLLM、LiteLLM、sglang 均可接。
 
 ## 4. 五个项目各自是什么（基于官方 README，非视频转述）
 
-1. **T3 Code——agent harness 控制面**。统一接入本机已装好的 Claude Code、Codex、Cursor、Grok Build、OpenCode、Antigravity 等，用你自己的订阅，提供桌面端（Electron）、Web 和 iOS/Android 移动端，手机可远程看进度、下指令。官方明确"什么都不卖、全开源、不满意可 fork"，但也自陈"very very early，预期有 bug"，且目前基本不接受外部大功能 PR。
-2. **OpenMausBot——把 AI 员工做成聊天软件**。开源版 Grok Bot 替代品（曾用名 OpenGrokBot，与 xAI/Meta/OpenAI/Manus 无关联）。左侧联系人列表每个 bot 背后跑本机的 Claude/Codex/Grok CLI，各有独立模型、独立云电脑（虚拟机），执行命令/改文件前在聊天里弹审批卡片，人点同意才动手。出生仅 3 个月，issue 区很活跃（也暴露出登录失败、人机验证过不去等早期问题）。
-3. **ThinkRail——JetBrains 的 spec 驱动 agentic IDE**。每个任务开一个真实 git worktree（独立分支、独立 cwd），多 agent 并行互不污染，main 分支保持干净；项目需求写成 living specs（规格图谱）作为 agent 的 ground truth，换对话不跑偏；agent 提 UI 改动会在聊天里渲染前后对比 mockup 供评论。
-4. **OpenMontage——把编程助手变视频制作工作室**。12 条生产管线（动画讲解、纪录片蒙太奇、电影预告、口播等）、100+ 工具、700+ agent 技能文件，支持参考视频驱动、脚本前联网调研、跨 7 个维度给供应商打分、预算治理与成本预估、合成前校验+渲染后自检的质量门。免费链路可走 Piper TTS/FFmpeg/Remotion/Archive.org 素材，付费链路接 FLUX/Kling/Runway/ElevenLabs/Suno。
-5. **Vorssaint——macOS 菜单栏工具箱**。原生 Swift，要求 macOS 14+ Apple Silicon。分应用调音量/音量放大到 100% 以上、硬件监控、窗口分屏、程序坞悬停预览、剪贴板历史、卸载工具、命令栏、径向菜单等，模块化按需启用、最小权限、本地索引、不注册账号不收集数据。
+1. **T3 Code——agent harness 控制面**。作者来自 pingdotgg 组织（Ping.gg，知名技术博主 Theo Browne 的团队，T3 Stack 同一阵营）。统一接入本机已装好的 Claude Code、Codex、Cursor、Grok Build、OpenCode、Google Antigravity、fx，用你自己的订阅，提供三端：Electron 桌面端、Web（app.t3.codes）、iOS/Android 原生 App（应用商店均已上架），手机可远程看进度、下指令。官方明确"什么都不卖、全开源、不满意可 fork"，但也自陈"very very early，预期有 bug"，且目前基本不接受外部大功能 PR。
+2. **OpenMausBot——把 AI 员工做成聊天软件**。开源版 Grok Bot 替代品（曾用名 OpenGrokBot，与 xAI/Meta/OpenAI/Manus 无关联）。Telegram 风格 IM 界面，左侧联系人列表每个 bot 背后跑本机的 Claude/Codex/Grok CLI，官方原文即"each with its own personality, its own model, its own cloud computer, and its own connected apps"——独立性格、独立模型、独立云电脑、独立应用授权；可实时观看 bot 的屏幕操作。执行命令/改文件前在聊天里弹审批卡片，"Approve what matters"，人点同意才动手。执行环境三档：云端 Linux 桌面、隔离的本地虚拟机、或（安全边界认证通过后的）宿主机本身，宿主机控制目前仅 macOS 和 Ubuntu Xorg 开放、Wayland 仍禁用。数据本地优先：transcript、密钥、事件存在 `~/.openmausbot` 不上云。500+ 应用通过 Composio 接入（见勘误 5）。出生仅 3 个月，issue 区很活跃，也暴露出登录失败、人机验证过不去等早期问题。
+3. **ThinkRail——JetBrains 的 spec 驱动 agentic IDE**。JetBrains InnovationHub 孵化器项目，围绕 `pi` coding agent 构建。每个任务开一个真实 git worktree（独立分支、独立 cwd），多 agent 并行互不污染，做完人工挑好的合并、其余删掉，main 分支保持干净；项目需求写成 living specs（规格图谱）作为 agent 的 ground truth，换对话不跑偏；agent 可在聊天里画 Mermaid 图、出选项对比和文件预览，提 UI 改动时渲染前后对比 mockup 供像 diff 一样评论。语言含简体中文（另英/日/俄/西，可自加 locale）；接本地模型走任意 OpenAI 兼容服务器（Ollama/LM Studio/llama.cpp/vLLM 等）。
+4. **OpenMontage——把编程助手变视频制作工作室**。12 条生产管线（动画讲解、纪录片蒙太奇、电影预告、口播等）、100+ 工具、700+ agent 技能文件，每条管线走统一流程 `research → proposal → script → scene_plan → assets → edit → compose`，每个阶段有专门的 director skill（markdown 指令文件）。两条上手路径：空白需求大白话起步，或**丢一个参考视频**（YouTube/Shorts/Reel/TikTok/本地片段均可）——agent 自动分析转写、节奏、镜头、关键帧、风格，回给你 2-3 个差异化方案、工具路径和成本预估，先出样片再全量制作。内置预算治理：执行前估价、预算预留锁定、花后对账三档模式（observe/warn 等），加每动作审批阈值；质量门含合成前校验和渲染后自检（ffprobe+抽帧+音频分析），每个供应商选择和降级都写进可审计决策日志。免费链路可走 Piper TTS/FFmpeg/Remotion/Archive.org 素材，付费链路接 FLUX/Kling/Runway/ElevenLabs/Suno。
+5. **Vorssaint——macOS 菜单栏工具箱**。原生 Swift，要求 macOS 14+ Apple Silicon，模块化按需安装（不装的功能不加载、不申请权限）。官方 README 确认的完整能力：分应用音量调节且可把轻声音频放大到 100% 以上（无需装音频驱动）、分应用音频输出（音乐走音箱、会议走耳机）、输出设备快捷键切换；系统监控（温度、CPU/GPU 使用率、内存压力）；窗口分屏布局与跨显示器移动、程序坞图标悬停预览窗口、带实时缩略图的应用切换器；剪贴板历史、文本片段、文件架、卸载器、清理器；另有命令栏、径向菜单、悬浮速记、清洁键盘模式、保持唤醒、显示器亮度控制（可压到硬件最低亮度之下）等。官方原话 "no account, no telemetry and no subscription"，支持十余种语言、可导出配置到另一台 Mac。
 
 ## 5. 我学到了什么：一条主线 + 一个信号
 
@@ -92,7 +93,7 @@ public_level: public
 - **协议**：OpenMontage（AGPL-3.0）、Vorssaint（GPL-3.0）禁止闭源衍生分发/SaaS 化集成，企业引入前法务要过目；T3 Code、OpenMausBot、ThinkRail 协议宽松。
 - **成熟度**：T3 Code 官方自陈早期、bug 多；OpenMausBot 出生仅 3 个月，issue 区有登录失败、人机验证拦截等实际阻塞；均不适合直接承载生产工作。
 - **成本口径**：视频与官方的低成本案例均为自报，未独立复测；真实费用取决于素材选择和供应商，Kling/Runway 等动态视频单价远高于图片动画。
-- **数据安全**：OpenMausBot 给 bot 配独立云电脑并授权 500+ 应用的模式，企业场景下等于把登录态开放给自动化代理，禁止用工作主账号尝试。
+- **数据安全**：OpenMausBot 给 bot 配独立云电脑并经 Composio 授权 500+ 应用的模式，企业场景下等于把第三方平台登录态开放给自动化代理；虽然项目本身数据本地存储（`~/.openmausbot`），但 Composio 凭证一旦配置即构成新的攻击面，禁止用工作主账号尝试。
 - 视频本身的二手信息有两处硬伤（见第 3 节），后续引用一律以 GitHub 一手信息为准。
 
 ## 10. 当前结论
