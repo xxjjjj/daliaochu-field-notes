@@ -7,6 +7,7 @@
 - [`focus-map.md`](focus-map.md) —— **聚焦地图（2026-08-15）**：168 篇按四条主线（AI Coding 工程化 / 企业落地 / 知识沉淀 / 自身运维）+ 一个杂项聚合，下阶段学习与止损的主视图。
 - [`stoploss-review-2026-08.md`](stoploss-review-2026-08.md) —— **止损评审清单**：23 篇能力底盘（已沉淀/已验证/可业务试点）+ 57 篇可小实验的三档评审表。
 - [`history-backfill-2026-04-to-2026-07.md`](history-backfill-2026-04-to-2026-07.md) —— 打捞处群历史内容补录工作台（2026-04-10 → 当前），按日聚合 + candidate 列表
+- [`agent-output-guarantee-chain-2026-11.md`](agent-output-guarantee-chain-2026-11.md) —— **AI 产出保证链（2026-11-23）**：把 11 月五张"看着像独立热点"的卡（记忆设计 / 智能负债 / TDD 与形式化验证 / GrokBot-pstack 三连 / 人体编程）收成一条论证链（输入→存量→判定→环境→改造），并指出这条链缺的最后一环是可回退性。
 - [`hermes-trio-navigation.md`](hermes-trio-navigation.md) —— Hermes 三件套导航（自我介绍 / 心跳机制 / Codex 入口），给新人 / 老板 / 部署者分别的看卡顺序
 
 ## 计划维护的索引（按视角）
